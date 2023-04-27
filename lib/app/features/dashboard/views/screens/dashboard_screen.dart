@@ -77,12 +77,27 @@ class DashboardScreen extends GetView<DashboardController> {
               child: GetPremiumCard(onPressed: () {}),
             ),
             const SizedBox(height: kSpacing * 2),
-            _buildTaskOverview(
-              data: controller.getAllTask(),
-              headerAxis: Axis.vertical,
-              crossAxisCount: 6,
-              crossAxisCellCount: 6,
-            ),
+            StreamBuilder(
+                stream: FirebaseFirestore.instance
+                    .collection('craftsman')
+                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                    .collection('requests')
+                    .where('isAccept', isEqualTo: 0)
+                    .snapshots(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    List data = snapshot.data!.docs;
+                    return _buildTaskOverview(
+                      data: data,
+                      crossAxisCount: 6,
+                      crossAxisCellCount:6,
+                    );
+                  } else {
+                    return const Center(
+                        child: CircularProgressIndicator());
+                  }
+                }),
+
             const SizedBox(height: kSpacing * 2),
 
             const SizedBox(height: kSpacing),
@@ -158,7 +173,7 @@ class DashboardScreen extends GetView<DashboardController> {
                       topRight: Radius.circular(kBorderRadius),
                       bottomRight: Radius.circular(kBorderRadius),
                     ),
-                    child: _Sidebar( )),
+                    child: _Sidebar()),
               ),
               Flexible(
                 flex: 9,
@@ -170,57 +185,70 @@ class DashboardScreen extends GetView<DashboardController> {
                     _buildProgress(),
                     const SizedBox(height: kSpacing * 2),
                     StreamBuilder(
-                      stream:FirebaseFirestore.instance.collection('craftsman').doc(FirebaseAuth.instance.currentUser!.uid).collection('requests').where('isAccept',isEqualTo: 0).snapshots() ,
-                      builder: (context,AsyncSnapshot snapshot) {
-                       if(snapshot.hasData){
-                         List data=snapshot.data!.docs;
-                         return _buildTaskOverview(
-                           data: data,
-                           crossAxisCount: 6,
-                           crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2,
-                         );
-                       }else{
-                         return const Center(child: CircularProgressIndicator());
-                       }
-                      }
-                    ),
+                        stream: FirebaseFirestore.instance
+                            .collection('craftsman')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .collection('requests')
+                            .where('isAccept', isEqualTo: 0)
+                            .snapshots(),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            List data = snapshot.data!.docs;
+                            return _buildTaskOverview(
+                              data: data,
+                              crossAxisCount: 6,
+                              crossAxisCellCount:
+                                  (constraints.maxWidth < 1360) ? 3 : 2,
+                            );
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                        }),
                     const SizedBox(height: kSpacing * 2),
                     StreamBuilder(
-                      stream: FirebaseFirestore.instance.collection("craftsman").doc(FirebaseAuth.instance.currentUser!.uid)
-                          .collection('services').snapshots(),
-                      builder: (context,AsyncSnapshot snapshot) {
-                        if(snapshot.hasData){
-                          List myService=snapshot.data.docs;
-                          return _buildActiveProject(
-                            data: myService,
-                            crossAxisCount: 6,
-                            crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2, service: true,
-                          );
-                        }else{
-                          return const Center(child: CircularProgressIndicator());
-                        }
-
-                      }
-                    ),
+                        stream: FirebaseFirestore.instance
+                            .collection("craftsman")
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .collection('services')
+                            .snapshots(),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            List myService = snapshot.data.docs;
+                            return _buildActiveProject(
+                              data: myService,
+                              crossAxisCount: 6,
+                              crossAxisCellCount:
+                                  (constraints.maxWidth < 1360) ? 3 : 2,
+                              service: true,
+                            );
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                        }),
                     const SizedBox(height: kSpacing),
                     StreamBuilder(
-                        stream: FirebaseFirestore.instance.collection("craftsman").doc(FirebaseAuth.instance.currentUser!.uid)
-                            .collection('requests').snapshots(),
-                        builder: (context,AsyncSnapshot snapshot) {
-                          if(snapshot.hasData){
-                            List myOrder=snapshot.data.docs;
+                        stream: FirebaseFirestore.instance
+                            .collection("craftsman")
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .collection('requests')
+                            .snapshots(),
+                        builder: (context, AsyncSnapshot snapshot) {
+                          if (snapshot.hasData) {
+                            List myOrder = snapshot.data.docs;
                             return _buildActiveProject(
                               data: myOrder,
                               crossAxisCount: 6,
-                              crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2, service: false,
+                              crossAxisCellCount:
+                                  (constraints.maxWidth < 1360) ? 3 : 2,
+                              service: false,
                             );
-                          }else{
-                            return const Center(child: CircularProgressIndicator());
+                          } else {
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
-
-                        }
-                    ),
-
+                        }),
                     const SizedBox(height: kSpacing),
                   ],
                 ),
@@ -252,7 +280,7 @@ class DashboardScreen extends GetView<DashboardController> {
       )),
     );
   }
-  
+
   Widget _buildHeader({Function()? onPressedMenu}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
@@ -278,43 +306,41 @@ class DashboardScreen extends GetView<DashboardController> {
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: (axis == Axis.horizontal)
           ? FutureBuilder(
-        future:getServices() ,
-            builder: (context,snapshot) {
-              if(snapshot.hasData){
-                List count =snapshot.data as List;
-                return Row(
-                  children: [
-                    Flexible(
-                      flex: 5,
-                      child: ProgressCard(
-                        data:  ProgressCardData(
-                          totalUndone: count.length,
-                          totalTaskInProress: 2,
-                        ),
-                        onPressedCheck: () {},
-                      ),
-                    ),
-                    const SizedBox(width: kSpacing / 2),
-                     Flexible(
-                      flex: 4,
-                      child: ProgressReportCard(
-                        data: ProgressReportCardData(
-                          title: "All Order",
-                          doneTask: 5,
-                          percent: .3,
-                          task: count.length,
-                          undoneTask: 2,
+              future: getServices(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List count = snapshot.data as List;
+                  return Row(
+                    children: [
+                      Flexible(
+                        flex: 5,
+                        child: ProgressCard(
+                          data: ProgressCardData(
+                            totalUndone: count.length,
+                            totalTaskInProress: 2,
+                          ),
+                          onPressedCheck: () {},
                         ),
                       ),
-                    ),
-                  ],
-                );
-
-              }else{
-                return const Center(child: CircularProgressIndicator());
-              }
-            }
-          )
+                      const SizedBox(width: kSpacing / 2),
+                      Flexible(
+                        flex: 4,
+                        child: ProgressReportCard(
+                          data: ProgressReportCardData(
+                            title: "All Order",
+                            doneTask: 5,
+                            percent: .3,
+                            task: count.length,
+                            undoneTask: 2,
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              })
           : Column(
               children: [
                 ProgressCard(
@@ -338,10 +364,14 @@ class DashboardScreen extends GetView<DashboardController> {
             ),
     );
   }
+
   Future getServices() async {
     var firestore = FirebaseFirestore.instance;
-    QuerySnapshot qn = await firestore.collection("craftsman").doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('services').get();
+    QuerySnapshot qn = await firestore
+        .collection("craftsman")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('services')
+        .get();
     return qn.docs;
   }
 
@@ -390,7 +420,7 @@ class DashboardScreen extends GetView<DashboardController> {
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: _ActiveProjectCard(
         onPressedSeeAll: () {},
-        title: service? 'My Service':'My Order',
+        title: service ? 'My Service' : 'My Order',
         child: StaggeredGridView.countBuilder(
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: crossAxisCount,
@@ -400,7 +430,7 @@ class DashboardScreen extends GetView<DashboardController> {
           crossAxisSpacing: kSpacing,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            return ProjectCard(data: data[index],service:service);
+            return ProjectCard(data: data[index], service: service);
           },
           staggeredTileBuilder: (int index) =>
               StaggeredTile.fit(crossAxisCellCount),
@@ -408,10 +438,14 @@ class DashboardScreen extends GetView<DashboardController> {
       ),
     );
   }
+
   Future getMyServices() async {
     var firestore = FirebaseFirestore.instance;
-    QuerySnapshot qn = await firestore.collection("craftsman").doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('services').get();
+    QuerySnapshot qn = await firestore
+        .collection("craftsman")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('services')
+        .get();
     return qn.docs;
   }
 
@@ -424,5 +458,4 @@ class DashboardScreen extends GetView<DashboardController> {
       ),
     );
   }
-
 }
