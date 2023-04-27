@@ -390,6 +390,7 @@ class DashboardScreen extends GetView<DashboardController> {
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: _ActiveProjectCard(
         onPressedSeeAll: () {},
+        title: service? 'My Service':'My Order',
         child: StaggeredGridView.countBuilder(
           physics: const NeverScrollableScrollPhysics(),
           crossAxisCount: crossAxisCount,
@@ -424,35 +425,4 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  // Widget _buildTeamMember({required List<ImageProvider> data}) {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-  //     child: Column(
-  //       crossAxisAlignment: CrossAxisAlignment.start,
-  //       children: [
-  //         _TeamMember(
-  //           totalMember: data.length,
-  //           onPressedAdd: () {},
-  //         ),
-  //         const SizedBox(height: kSpacing / 2),
-  //         ListProfilImage(maxImages: 6, images: data),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget _buildRecentMessages({required List<ChattingCardData> data}) {
-  //   return Column(children: [
-  //     Padding(
-  //       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-  //       child: _RecentMessages(onPressedMore: () {}),
-  //     ),
-  //     const SizedBox(height: kSpacing / 2),
-  //     ...data
-  //         .map(
-  //           (e) => ChattingCard(data: e, onPressed: () {}),
-  //         )
-  //         .toList(),
-  //   ]);
-  // }
 }

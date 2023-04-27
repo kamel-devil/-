@@ -3,11 +3,13 @@ part of dashboard;
 class _ActiveProjectCard extends StatelessWidget {
   const _ActiveProjectCard({
     required this.child,
+    required this.title,
     required this.onPressedSeeAll,
     Key? key,
   }) : super(key: key);
 
   final Widget child;
+  final String title;
   final Function() onPressedSeeAll;
 
   @override
@@ -23,7 +25,7 @@ class _ActiveProjectCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _title("My Services"),
+                _title(title),
                 _seeAllButton(onPressed: onPressedSeeAll),
               ],
             ),
@@ -49,7 +51,7 @@ class _ActiveProjectCard extends StatelessWidget {
   Widget _seeAllButton({required Function() onPressed}) {
     return TextButton(
       onPressed: onPressed,
-      child: const Text("See All"),
+      child: const Text("+"),
       style: TextButton.styleFrom(primary: kFontColorPallets[1]),
     );
   }
