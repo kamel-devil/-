@@ -18,8 +18,7 @@ class LoginScreen extends StatelessWidget {
       bottom: Radius.circular(10.0),
       top: Radius.circular(10.0),
     );
-    String email = '';
-    String? pass = '';
+
     return FlutterLogin(
       title: 'Herafy',
       logo: 'assets/logo.png',
@@ -37,7 +36,7 @@ class LoginScreen extends StatelessWidget {
         accentColor: Colors.black,
         errorColor: Colors.deepOrange,
         titleStyle: const TextStyle(
-          color: Colors.greenAccent,
+          color: Colors.white,
           fontFamily: 'Quicksand',
           letterSpacing: 4,
         ),
@@ -56,15 +55,18 @@ class LoginScreen extends StatelessWidget {
           shape: ContinuousRectangleBorder(
               borderRadius: BorderRadius.circular(20.0)),
         ),
+        textFieldStyle: const TextStyle(color: Colors.black),
         inputTheme: InputDecorationTheme(
           filled: true,
+
           fillColor: Colors.purple.withOpacity(.1),
           contentPadding: EdgeInsets.zero,
           errorStyle: const TextStyle(
-            backgroundColor: Colors.orange,
+            backgroundColor: Colors.red,
             color: Colors.white,
           ),
-          labelStyle: const TextStyle(fontSize: 12),
+          labelStyle: const TextStyle(fontSize: 12,color: Colors.black),
+
           enabledBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.blue.shade700, width: 4),
             borderRadius: inputBorder,
@@ -122,8 +124,8 @@ class LoginScreen extends StatelessWidget {
       if (e.code == 'user-not-found') {
         AwesomeDialog(
           context: context,
-          dialogType: DialogType.INFO,
-          animType: AnimType.BOTTOMSLIDE,
+          dialogType: DialogType.info,
+          animType: AnimType.bottomSlide,
           title: 'Attend  !',
           desc: 'This Account IsNot Exist',
           btnCancelOnPress: () {},
@@ -132,8 +134,8 @@ class LoginScreen extends StatelessWidget {
       } else if (e.code == 'wrong-password') {
         AwesomeDialog(
           context: context,
-          dialogType: DialogType.INFO,
-          animType: AnimType.BOTTOMSLIDE,
+          dialogType: DialogType.info,
+          animType: AnimType.bottomSlide,
           title: 'Attend  !',
           desc: 'The password is Wrong',
           btnOkOnPress: () {},

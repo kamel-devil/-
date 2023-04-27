@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:project_management/app/constans/app_constants.dart';
@@ -33,7 +35,7 @@ class TaskCard extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final TaskCardData data;
+  final  data;
 
   final Function() onPressedMore;
   final Function() onPressedTask;
@@ -54,12 +56,11 @@ class TaskCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(5),
               child: _Tile(
-                dotColor: data.type.getColor(),
-                title: data.title,
-                subtitle: (data.dueDay < 0)
-                    ? "Late in ${data.dueDay * -1} days"
-                    : "Due in " +
-                        ((data.dueDay > 1) ? "${data.dueDay} days" : "today"),
+                dotColor: Colors.white,
+                title: data['services'],
+                subtitle:
+                data['type']
+                  ,
                 onPressedMore: onPressedMore,
               ),
             ),
@@ -71,39 +72,78 @@ class TaskCard extends StatelessWidget {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       elevation: 0,
-                      primary: data.type.getColor(),
+                      primary: Colors.green,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
                     ),
-                    onPressed: onPressedTask,
-                    child: Text(
-                      data.type.toStringValue(),
+                    onPressed: () async {
+                      await FirebaseFirestore.instance
+                          .collection('craftsman')
+                          .doc(FirebaseAuth.instance.currentUser!.uid).collection('requests').doc(data['id'])
+                          .set(
+                        {
+                          'isAccept': 1,
+                        },
+                        SetOptions(merge: true),
+                      );
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(data['userUid']).collection('request').doc(data['userDocID'])
+                          .set(
+                        {
+                          'isAccept': 1,
+                        },
+                        SetOptions(merge: true),
+                      );
+                    },
+                    child: const Text(
+                      'Accept',
                     ),
                   ),
-                  ListProfilImage(
-                    images: data.profilContributors,
-                    onPressed: onPressedContributors,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0,
+                      primary:Colors.red,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                    ),
+                    onPressed: () async {
+                      await FirebaseFirestore.instance
+                          .collection('craftsman')
+                          .doc(FirebaseAuth.instance.currentUser!.uid).collection('requests').doc(data['id'])
+                          .set(
+                        {
+                          'isAccept': 2,
+                        },
+                        SetOptions(merge: true),
+                      );
+                      await FirebaseFirestore.instance
+                          .collection('users')
+                          .doc(data['userUid']).collection('request').doc(data['userDocID'])
+                          .set(
+                        {
+                          'isAccept': 2,
+                        },
+                        SetOptions(merge: true),
+                      );
+                    },
+                    child: const Text(
+                      'Reject',
+                    ),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: kSpacing / 2),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kSpacing / 2),
-              child: Row(
-                children: [
-                  _IconButton(
-                    iconData: EvaIcons.messageCircleOutline,
-                    onPressed: onPressedComments,
-                    totalContributors: data.totalComments,
-                  ),
-                  const SizedBox(width: kSpacing / 2),
-                  _IconButton(
-                    iconData: EvaIcons.peopleOutline,
-                    onPressed: onPressedContributors,
-                    totalContributors: data.totalContributors,
-                  ),
+                  Container(
+                    padding: const EdgeInsets.all(1),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: Theme.of(Get.context!).cardColor,
+                    ),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(data['image']),
+                      radius: 15,
+                    ),
+                  )
                 ],
               ),
             ),

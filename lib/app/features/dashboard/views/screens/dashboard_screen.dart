@@ -1,7 +1,5 @@
 library dashboard;
 
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +7,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 import 'package:project_management/app/shared_components/chatting_card.dart';
 import 'package:project_management/app/shared_components/get_premium_card.dart';
-import 'package:project_management/app/shared_components/list_profil_image.dart';
 import 'package:project_management/app/shared_components/progress_card.dart';
 import 'package:project_management/app/shared_components/progress_report_card.dart';
 import 'package:project_management/app/shared_components/responsive_builder.dart';
@@ -55,9 +52,9 @@ class DashboardScreen extends GetView<DashboardController> {
       key: controller.scaffoldKey,
       drawer: (ResponsiveBuilder.isDesktop(context))
           ? null
-          : Drawer(
+          : const Drawer(
               child: Padding(
-                padding: const EdgeInsets.only(top: kSpacing),
+                padding: EdgeInsets.only(top: kSpacing),
                 child: _Sidebar(),
               ),
             ),
@@ -73,7 +70,7 @@ class DashboardScreen extends GetView<DashboardController> {
             const SizedBox(height: kSpacing),
             _buildProgress(axis: Axis.vertical),
             const SizedBox(height: kSpacing),
-            _buildTeamMember(data: controller.getMember()),
+            // _buildTeamMember(data: controller.getMember()),
             const SizedBox(height: kSpacing),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: kSpacing),
@@ -87,13 +84,9 @@ class DashboardScreen extends GetView<DashboardController> {
               crossAxisCellCount: 6,
             ),
             const SizedBox(height: kSpacing * 2),
-            _buildActiveProject(
-              data: controller.getActiveProject(),
-              crossAxisCount: 6,
-              crossAxisCellCount: 6,
-            ),
+
             const SizedBox(height: kSpacing),
-            _buildRecentMessages(data: controller.getChatting()),
+            // _buildRecentMessages(data: controller.getChatting()),
           ]);
         },
         tabletBuilder: (context, constraints) {
@@ -126,15 +119,6 @@ class DashboardScreen extends GetView<DashboardController> {
                               : 2,
                     ),
                     const SizedBox(height: kSpacing * 2),
-                    _buildActiveProject(
-                      data: controller.getActiveProject(),
-                      crossAxisCount: 6,
-                      crossAxisCellCount: (constraints.maxWidth < 950)
-                          ? 6
-                          : (constraints.maxWidth < 1100)
-                              ? 3
-                              : 2,
-                    ),
                     const SizedBox(height: kSpacing),
                   ],
                 ),
@@ -147,7 +131,7 @@ class DashboardScreen extends GetView<DashboardController> {
                     _buildProfile(data: controller.getProfil()),
                     const Divider(thickness: 1),
                     const SizedBox(height: kSpacing),
-                    _buildTeamMember(data: controller.getMember()),
+                    // _buildTeamMember(data: controller.getMember()),
                     const SizedBox(height: kSpacing),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
@@ -156,7 +140,7 @@ class DashboardScreen extends GetView<DashboardController> {
                     const SizedBox(height: kSpacing),
                     const Divider(thickness: 1),
                     const SizedBox(height: kSpacing),
-                    _buildRecentMessages(data: controller.getChatting()),
+                    // _buildRecentMessages(data: controller.getChatting()),
                   ],
                 ),
               )
@@ -185,17 +169,58 @@ class DashboardScreen extends GetView<DashboardController> {
                     const SizedBox(height: kSpacing * 2),
                     _buildProgress(),
                     const SizedBox(height: kSpacing * 2),
-                    _buildTaskOverview(
-                      data: controller.getAllTask(),
-                      crossAxisCount: 6,
-                      crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2,
+                    StreamBuilder(
+                      stream:FirebaseFirestore.instance.collection('craftsman').doc(FirebaseAuth.instance.currentUser!.uid).collection('requests').where('isAccept',isEqualTo: 0).snapshots() ,
+                      builder: (context,AsyncSnapshot snapshot) {
+                       if(snapshot.hasData){
+                         List data=snapshot.data!.docs;
+                         return _buildTaskOverview(
+                           data: data,
+                           crossAxisCount: 6,
+                           crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2,
+                         );
+                       }else{
+                         return const Center(child: CircularProgressIndicator());
+                       }
+                      }
                     ),
                     const SizedBox(height: kSpacing * 2),
-                    _buildActiveProject(
-                      data: controller.getActiveProject(),
-                      crossAxisCount: 6,
-                      crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2,
+                    StreamBuilder(
+                      stream: FirebaseFirestore.instance.collection("craftsman").doc(FirebaseAuth.instance.currentUser!.uid)
+                          .collection('services').snapshots(),
+                      builder: (context,AsyncSnapshot snapshot) {
+                        if(snapshot.hasData){
+                          List myService=snapshot.data.docs;
+                          return _buildActiveProject(
+                            data: myService,
+                            crossAxisCount: 6,
+                            crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2, service: true,
+                          );
+                        }else{
+                          return const Center(child: CircularProgressIndicator());
+                        }
+
+                      }
                     ),
+                    const SizedBox(height: kSpacing),
+                    StreamBuilder(
+                        stream: FirebaseFirestore.instance.collection("craftsman").doc(FirebaseAuth.instance.currentUser!.uid)
+                            .collection('requests').snapshots(),
+                        builder: (context,AsyncSnapshot snapshot) {
+                          if(snapshot.hasData){
+                            List myOrder=snapshot.data.docs;
+                            return _buildActiveProject(
+                              data: myOrder,
+                              crossAxisCount: 6,
+                              crossAxisCellCount: (constraints.maxWidth < 1360) ? 3 : 2, service: false,
+                            );
+                          }else{
+                            return const Center(child: CircularProgressIndicator());
+                          }
+
+                        }
+                    ),
+
                     const SizedBox(height: kSpacing),
                   ],
                 ),
@@ -208,7 +233,7 @@ class DashboardScreen extends GetView<DashboardController> {
                     _buildProfile(data: controller.getProfil()),
                     const Divider(thickness: 1),
                     const SizedBox(height: kSpacing),
-                    _buildTeamMember(data: controller.getMember()),
+                    // _buildTeamMember(data: controller.getMember()),
                     const SizedBox(height: kSpacing),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
@@ -217,7 +242,7 @@ class DashboardScreen extends GetView<DashboardController> {
                     const SizedBox(height: kSpacing),
                     const Divider(thickness: 1),
                     const SizedBox(height: kSpacing),
-                    _buildRecentMessages(data: controller.getChatting()),
+                    // _buildRecentMessages(data: controller.getChatting()),
                   ],
                 ),
               )
@@ -227,7 +252,7 @@ class DashboardScreen extends GetView<DashboardController> {
       )),
     );
   }
-
+  
   Widget _buildHeader({Function()? onPressedMenu}) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
@@ -252,33 +277,44 @@ class DashboardScreen extends GetView<DashboardController> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
       child: (axis == Axis.horizontal)
-          ? Row(
-              children: [
-                Flexible(
-                  flex: 5,
-                  child: ProgressCard(
-                    data: const ProgressCardData(
-                      totalUndone: 10,
-                      totalTaskInProress: 2,
+          ? FutureBuilder(
+        future:getServices() ,
+            builder: (context,snapshot) {
+              if(snapshot.hasData){
+                List count =snapshot.data as List;
+                return Row(
+                  children: [
+                    Flexible(
+                      flex: 5,
+                      child: ProgressCard(
+                        data:  ProgressCardData(
+                          totalUndone: count.length,
+                          totalTaskInProress: 2,
+                        ),
+                        onPressedCheck: () {},
+                      ),
                     ),
-                    onPressedCheck: () {},
-                  ),
-                ),
-                const SizedBox(width: kSpacing / 2),
-                const Flexible(
-                  flex: 4,
-                  child: ProgressReportCard(
-                    data: ProgressReportCardData(
-                      title: "1st Sprint",
-                      doneTask: 5,
-                      percent: .3,
-                      task: 3,
-                      undoneTask: 2,
+                    const SizedBox(width: kSpacing / 2),
+                     Flexible(
+                      flex: 4,
+                      child: ProgressReportCard(
+                        data: ProgressReportCardData(
+                          title: "All Order",
+                          doneTask: 5,
+                          percent: .3,
+                          task: count.length,
+                          undoneTask: 2,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-              ],
-            )
+                  ],
+                );
+
+              }else{
+                return const Center(child: CircularProgressIndicator());
+              }
+            }
+          )
           : Column(
               children: [
                 ProgressCard(
@@ -302,9 +338,15 @@ class DashboardScreen extends GetView<DashboardController> {
             ),
     );
   }
+  Future getServices() async {
+    var firestore = FirebaseFirestore.instance;
+    QuerySnapshot qn = await firestore.collection("craftsman").doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('services').get();
+    return qn.docs;
+  }
 
   Widget _buildTaskOverview({
-    required List<TaskCardData> data,
+    required List data,
     int crossAxisCount = 6,
     int crossAxisCellCount = 2,
     Axis headerAxis = Axis.horizontal,
@@ -339,39 +381,29 @@ class DashboardScreen extends GetView<DashboardController> {
   }
 
   Widget _buildActiveProject({
-    required List<ProjectCardData> data,
+    required List data,
+    required bool service,
     int crossAxisCount = 6,
     int crossAxisCellCount = 2,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-      child: FutureBuilder(
-        future:getMyServices() ,
-        builder: (context,snapshot) {
-          if(snapshot.hasData){
-            List myService =snapshot.data as List;
-            return _ActiveProjectCard(
-              onPressedSeeAll: () {},
-              child: StaggeredGridView.countBuilder(
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: crossAxisCount,
-                itemCount: myService.length,
-                addAutomaticKeepAlives: false,
-                mainAxisSpacing: kSpacing,
-                crossAxisSpacing: kSpacing,
-                shrinkWrap: true,
-                itemBuilder: (context, index) {
-                  return ProjectCard(data: myService[index]);
-                },
-                staggeredTileBuilder: (int index) =>
-                    StaggeredTile.fit(crossAxisCellCount),
-              ),
-            );
-          }else{
-            return const CircularProgressIndicator();
-          }
-
-        }
+      child: _ActiveProjectCard(
+        onPressedSeeAll: () {},
+        child: StaggeredGridView.countBuilder(
+          physics: const NeverScrollableScrollPhysics(),
+          crossAxisCount: crossAxisCount,
+          itemCount: data.length,
+          addAutomaticKeepAlives: false,
+          mainAxisSpacing: kSpacing,
+          crossAxisSpacing: kSpacing,
+          shrinkWrap: true,
+          itemBuilder: (context, index) {
+            return ProjectCard(data: data[index],service:service);
+          },
+          staggeredTileBuilder: (int index) =>
+              StaggeredTile.fit(crossAxisCellCount),
+        ),
       ),
     );
   }
@@ -392,35 +424,35 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildTeamMember({required List<ImageProvider> data}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _TeamMember(
-            totalMember: data.length,
-            onPressedAdd: () {},
-          ),
-          const SizedBox(height: kSpacing / 2),
-          ListProfilImage(maxImages: 6, images: data),
-        ],
-      ),
-    );
-  }
+  // Widget _buildTeamMember({required List<ImageProvider> data}) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         _TeamMember(
+  //           totalMember: data.length,
+  //           onPressedAdd: () {},
+  //         ),
+  //         const SizedBox(height: kSpacing / 2),
+  //         ListProfilImage(maxImages: 6, images: data),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget _buildRecentMessages({required List<ChattingCardData> data}) {
-    return Column(children: [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-        child: _RecentMessages(onPressedMore: () {}),
-      ),
-      const SizedBox(height: kSpacing / 2),
-      ...data
-          .map(
-            (e) => ChattingCard(data: e, onPressed: () {}),
-          )
-          .toList(),
-    ]);
-  }
+  // Widget _buildRecentMessages({required List<ChattingCardData> data}) {
+  //   return Column(children: [
+  //     Padding(
+  //       padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+  //       child: _RecentMessages(onPressedMore: () {}),
+  //     ),
+  //     const SizedBox(height: kSpacing / 2),
+  //     ...data
+  //         .map(
+  //           (e) => ChattingCard(data: e, onPressed: () {}),
+  //         )
+  //         .toList(),
+  //   ]);
+  // }
 }

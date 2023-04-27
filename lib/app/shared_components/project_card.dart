@@ -19,12 +19,13 @@ class ProjectCardData {
 }
 
 class ProjectCard extends StatelessWidget {
-  const ProjectCard({
+   ProjectCard({
     required this.data,
-    Key? key,
+    Key? key, required this.service,
   }) : super(key: key);
 
   final  data;
+  final bool service;
 
   @override
   Widget build(BuildContext context) {
@@ -40,12 +41,12 @@ class ProjectCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _TitleText(data['name']),
+              _TitleText( service? data['name']:data['services']),
               const SizedBox(height: 5),
               Row(
                 children: [
-                  const _SubtitleText("Release time : "),
-                  _ReleaseTimeText(data['date'])
+                   _SubtitleText(service?"Release time : ":'Order By'),
+                  _ReleaseTimeText(service?data['date']:data['user'])
                 ],
               )
             ],

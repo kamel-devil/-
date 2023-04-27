@@ -27,6 +27,7 @@ class InputField extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 3.7,
               color: Colors.blue[50],
               child: TextField(
+
                 controller:controller ,
                 style: const TextStyle(
                   color: Colors.black,

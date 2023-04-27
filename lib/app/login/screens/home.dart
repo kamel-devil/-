@@ -168,7 +168,6 @@ class _HomeState extends State<Home> {
                                 MaterialStateProperty.all(Colors.blue),
                           ),
                           onPressed: () {
-
                             signUp().then((value) {
                               Get.toNamed(AppPages.initial);
                               addDataEmail();
@@ -236,6 +235,7 @@ class _HomeState extends State<Home> {
     addUser = FirebaseFirestore.instance.collection('craftsman');
     addUser?.doc('${user?.uid}').set({
       'email': email.text,
+      'accept':true,
       'name': nameCont.text,
       'national_id': naID.text,
       'id': user?.uid,

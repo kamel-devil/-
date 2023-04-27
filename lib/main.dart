@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       // initialRoute: AppPages.initialHome,
       getPages: AppPages.routes,
 
-      home: LoginScreen(),
+      home: const LoginScreen(),
     );
   }
 }

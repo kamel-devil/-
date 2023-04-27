@@ -18,7 +18,7 @@ class _OverviewHeader extends StatelessWidget {
           ? Row(
               children: [
                 const Text(
-                  "Task Overview",
+                  "Requests",
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
                 const Spacer(),
@@ -33,25 +33,12 @@ class _OverviewHeader extends StatelessWidget {
             )
           : Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  "Task Overview",
+              children: const [
+                Text(
+                  "Requests",
                   style: TextStyle(fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height: 10),
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  physics: const BouncingScrollPhysics(),
-                  child: Row(
-                    children: _listButton(
-                      task: task.value,
-                      onSelected: (value) {
-                        task.value = value;
-                        onSelected(value);
-                      },
-                    ),
-                  ),
-                ),
+                SizedBox(height: 10),
               ],
             ),
     );

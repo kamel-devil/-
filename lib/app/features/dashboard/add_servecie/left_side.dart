@@ -257,12 +257,6 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
 
       // uploadTask = ref.putFile(File(file!.path));
       uploadTask = ref.putData(selectedImageInBytes!, metadata);
-      String docId = FirebaseFirestore.instance
-          .collection('category')
-          .doc(supName)
-          .collection('services')
-          .doc()
-          .id;
       String docId2 =
           FirebaseFirestore.instance.collection('allService').doc().id;
       await uploadTask.whenComplete(() => null);
@@ -272,14 +266,19 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
         'isAccept': false,
         "name": service.text,
         "des": des.text,
+        'id':docId2,
         'type': supName!,
+        'uid': FirebaseAuth.instance.currentUser!.uid,
         'price': price.text,
         'time': DateFormat('hh:mm a').format(DateTime.now()).toString(),
         'date': DateFormat('yyyy-MM-dd').format(DateTime.now()).toString(),
       });
 
-      await FirebaseFirestore.instance.collection('craftsman').doc(FirebaseAuth.instance.currentUser!.uid).get().then((value)  async {
-
+      await FirebaseFirestore.instance
+          .collection('craftsman')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .get()
+          .then((value) async {
         await FirebaseFirestore.instance
             .collection('allService')
             .doc(docId2)
@@ -290,14 +289,13 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
           "name": service.text,
           "des": des.text,
           'type': supName!,
-          'craftsman':value['name'],
+          'uid': FirebaseAuth.instance.currentUser!.uid,
+          'craftsman': value['name'],
           'price': price.text,
           'time': DateFormat('hh:mm a').format(DateTime.now()).toString(),
-          'date': DateFormat('yyyy-MM-dd').format(DateTime.now()).toString(),      });
+          'date': DateFormat('yyyy-MM-dd').format(DateTime.now()).toString(),
+        });
       });
-
-
-
     } catch (e) {
       print(e);
     }
@@ -309,11 +307,11 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
     QuerySnapshot qn = await firestore.collection("category").get();
     return qn.docs;
   }
-  // getUser() async {
-  //   var firestore = FirebaseFirestore.instance;
-  //   QuerySnapshot qn = await firestore.collection("craftsman").get();
-  //   return qn.docs;
-  // }
+// getUser() async {
+//   var firestore = FirebaseFirestore.instance;
+//   QuerySnapshot qn = await firestore.collection("craftsman").get();
+//   return qn.docs;
+// }
 
 // addCategory() async {
 //   CollectionReference addPost =
