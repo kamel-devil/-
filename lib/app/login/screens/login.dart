@@ -6,6 +6,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:get/get.dart';
 
 import '../../config/routes/app_pages.dart';
+import 'home.dart';
 
 
 class LoginScreen extends StatelessWidget {
@@ -21,7 +22,21 @@ class LoginScreen extends StatelessWidget {
 
     return FlutterLogin(
       title: 'Herafy',
+
       logo: 'assets/logo.png',
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 200.0),
+          child: InkWell(
+              onTap: (){
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>  Home()),
+                );            },
+              child: Text('Register')),
+        )
+
+      ],
       onLogin: (lData) {
         login1(lData.name, lData.password, context: context);
         return null;
@@ -36,7 +51,7 @@ class LoginScreen extends StatelessWidget {
         accentColor: Colors.black,
         errorColor: Colors.deepOrange,
         titleStyle: const TextStyle(
-          color: Colors.white,
+          color: Colors.blue,
           fontFamily: 'Quicksand',
           letterSpacing: 4,
         ),
@@ -101,6 +116,8 @@ class LoginScreen extends StatelessWidget {
           // shape: CircleBorder(side: BorderSide(color: Colors.green)),
           // shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(55.0)),
         ),
+
+        
       ),
       onRecoverPassword: (String) {
 

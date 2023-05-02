@@ -154,8 +154,6 @@ class _HomeState extends State<Home> {
                           ),
                           // color: Colors.grey[200],
                           onPressed: () {
-                            Get.toNamed(AppPages.initial);
-
                           },
                           child: const Text("Cancel"),
                         ),

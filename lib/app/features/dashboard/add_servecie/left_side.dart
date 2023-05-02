@@ -307,20 +307,4 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
     QuerySnapshot qn = await firestore.collection("category").get();
     return qn.docs;
   }
-// getUser() async {
-//   var firestore = FirebaseFirestore.instance;
-//   QuerySnapshot qn = await firestore.collection("craftsman").get();
-//   return qn.docs;
-// }
-
-// addCategory() async {
-//   CollectionReference addPost =
-//       FirebaseFirestore.instance.collection('category');
-//   var imageName = basename(pickedImage!.path);
-//   Uint8List imageData = await XFile(pickedImage!.path).readAsBytes();
-//   var ref = FirebaseStorage.instance.ref('images/$imageName');
-//   await ref.putData(imageData);
-//   String imageUrl = await ref.getDownloadURL();
-//   addPost.add({'image': imageUrl, "name": category.text.toString()});
-// }
 }
