@@ -13,11 +13,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
       options: const FirebaseOptions(
           apiKey: "AIzaSyAKKcVY2qktvq_Cm1_wTqpJGRqIqE5R3Gg",
+          authDomain: "herafy-983de.firebaseapp.com",
           projectId: "herafy-983de",
+          storageBucket: "herafy-983de.appspot.com",
           messagingSenderId: "1088905524845",
           appId: "1:1088905524845:web:a402d7112952c24da4b164",
-        storageBucket: "herafy-983de.appspot.com",
-
+          measurementId: "G-HBZV1ZHMNK"
       ));
   runApp(const MyApp());
 }
