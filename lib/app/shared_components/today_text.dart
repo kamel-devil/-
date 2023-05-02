@@ -11,12 +11,14 @@ class TodayText extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Today",
-            style: Theme.of(context).textTheme.caption,
+            style: TextStyle(color: Colors.black),
           ),
           Text(
             DateFormat.yMMMEd().format(DateTime.now()),
+            style: const TextStyle(color: Colors.black),
+
           )
         ],
       ),

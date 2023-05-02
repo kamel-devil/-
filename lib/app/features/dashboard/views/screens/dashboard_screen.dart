@@ -253,27 +253,38 @@ class DashboardScreen extends GetView<DashboardController> {
                   ],
                 ),
               ),
-              Flexible(
-                flex: 4,
-                child: Column(
-                  children: [
-                    const SizedBox(height: kSpacing / 2),
-                    _buildProfile(data: controller.getProfil()),
-                    const Divider(thickness: 1),
-                    const SizedBox(height: kSpacing),
-                    // _buildTeamMember(data: controller.getMember()),
-                    const SizedBox(height: kSpacing),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-                      child: GetPremiumCard(onPressed: () {}),
-                    ),
-                    const SizedBox(height: kSpacing),
-                    const Divider(thickness: 1),
-                    const SizedBox(height: kSpacing),
-                    // _buildRecentMessages(data: controller.getChatting()),
-                  ],
-                ),
-              )
+              // Flexible(
+              //   flex: 4,
+              //   child: Column(
+              //     children: [
+              //       const SizedBox(height: kSpacing / 2),
+              //       FutureBuilder(
+              //         future: getInfoProfile(),
+              //         builder: (context,snapshot) {
+              //           if(snapshot.hasData){
+              //             List infoPro =snapshot.data as List;
+              //             return _buildProfile(data: controller.getProfil());
+              //
+              //           }else{
+              //             return const Center(child: CircularProgressIndicator());
+              //           }
+              //         }
+              //       ),
+              //       const Divider(thickness: 1),
+              //       const SizedBox(height: kSpacing),
+              //       // _buildTeamMember(data: controller.getMember()),
+              //       const SizedBox(height: kSpacing),
+              //       Padding(
+              //         padding: const EdgeInsets.symmetric(horizontal: kSpacing),
+              //         child: GetPremiumCard(onPressed: () {}),
+              //       ),
+              //       const SizedBox(height: kSpacing),
+              //       const Divider(thickness: 1),
+              //       const SizedBox(height: kSpacing),
+              //       // _buildRecentMessages(data: controller.getChatting()),
+              //     ],
+              //   ),
+              // )
             ],
           );
         },
@@ -366,6 +377,15 @@ class DashboardScreen extends GetView<DashboardController> {
   }
 
   Future getServices() async {
+    var firestore = FirebaseFirestore.instance;
+    QuerySnapshot qn = await firestore
+        .collection("craftsman")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('services')
+        .get();
+    return qn.docs;
+  }
+  Future getInfoProfile() async {
     var firestore = FirebaseFirestore.instance;
     QuerySnapshot qn = await firestore
         .collection("craftsman")

@@ -15,19 +15,19 @@ class _ProfilTile extends StatelessWidget {
       leading: CircleAvatar(backgroundImage: data.photo),
       title: Text(
         data.name,
-        style: TextStyle(fontSize: 14, color: kFontColorPallets[0]),
+        style: const TextStyle(fontSize: 14, color:Colors.black),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
       subtitle: Text(
         data.email,
-        style: TextStyle(fontSize: 12, color: kFontColorPallets[2]),
+        style: const TextStyle(fontSize: 12, color:Colors.black),
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
       trailing: IconButton(
         onPressed: onPressedNotification,
-        icon: const Icon(EvaIcons.bellOutline),
+        icon: const Icon(EvaIcons.bellOutline,color:Colors.black),
         tooltip: "notification",
       ),
     );

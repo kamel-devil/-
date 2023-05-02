@@ -32,7 +32,7 @@ class LoginScreen extends StatelessWidget {
         ));
       },
       theme: LoginTheme(
-        primaryColor: Colors.cyan,
+        primaryColor: Colors.white,
         accentColor: Colors.black,
         errorColor: Colors.deepOrange,
         titleStyle: const TextStyle(
@@ -46,10 +46,10 @@ class LoginScreen extends StatelessWidget {
         ),
         buttonStyle: const TextStyle(
           fontWeight: FontWeight.w800,
-          color: Colors.white,
+          color: Colors.black,
         ),
         cardTheme: CardTheme(
-          color: Colors.white,
+          color: Colors.blue,
           elevation: 5,
           margin: const EdgeInsets.only(top: 15),
           shape: ContinuousRectangleBorder(
@@ -58,21 +58,20 @@ class LoginScreen extends StatelessWidget {
         textFieldStyle: const TextStyle(color: Colors.black),
         inputTheme: InputDecorationTheme(
           filled: true,
-
           fillColor: Colors.purple.withOpacity(.1),
           contentPadding: EdgeInsets.zero,
           errorStyle: const TextStyle(
             backgroundColor: Colors.red,
             color: Colors.white,
           ),
-          labelStyle: const TextStyle(fontSize: 12,color: Colors.black),
+          labelStyle: const TextStyle(fontSize: 12,color: Colors.white),
 
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue.shade700, width: 4),
+          enabledBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 4),
             borderRadius: inputBorder,
           ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.blue.shade400, width: 5),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.white, width: 5),
             borderRadius: inputBorder,
           ),
           errorBorder: UnderlineInputBorder(
@@ -84,13 +83,14 @@ class LoginScreen extends StatelessWidget {
             borderRadius: inputBorder,
           ),
           disabledBorder: const UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey, width: 5),
+            borderSide: BorderSide(color: Colors.black, width: 5),
             borderRadius: inputBorder,
           ),
         ),
         buttonTheme: LoginButtonTheme(
+
           splashColor: Colors.purple,
-          backgroundColor: const Color(0xFF03DAC5),
+          backgroundColor: Colors.white,
           highlightColor: Colors.lightGreen,
           elevation: 9.0,
           highlightElevation: 6.0,
