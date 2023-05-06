@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../../config/routes/app_pages.dart';
 import '../widgets/input_field.dart';
+import 'login.dart';
 
 
 class Home extends StatefulWidget {
@@ -230,6 +231,7 @@ class _HomeState extends State<Home> {
                           ),
                           // color: Colors.grey[200],
                           onPressed: () {
+                            Get.to(const LoginScreen());
                           },
                           child: const Text("Cancel"),
                         ),
