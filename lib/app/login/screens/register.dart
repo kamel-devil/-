@@ -1,13 +1,14 @@
+
+import 'package:awesome_dialog/awesome_dialog.dart' as dialog;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:awesome_dialog/awesome_dialog.dart' as dialog;
-import 'package:url_launcher/url_launcher.dart';
 
 import '../../config/routes/app_pages.dart';
-import '../widgets/gender.dart';
 import '../widgets/input_field.dart';
+
 
 class Home extends StatefulWidget {
    Home({Key? key}) : super(key: key);
@@ -124,6 +125,8 @@ class _HomeState extends State<Home> {
                               width: 50,
                               child: Text(
                                 "Gender",
+                                style: TextStyle(color: Colors.black),
+
                                 textAlign: TextAlign.left,
                               ),
                             ),
@@ -151,6 +154,7 @@ class _HomeState extends State<Home> {
                               width: 50.0,
                               child: Text(
                                 "Male",
+                                style: TextStyle(color: Colors.black),
                                 textAlign: TextAlign.left,
                               ),
                             ),
@@ -170,7 +174,8 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                             ),
-                            const SizedBox(
+                             const SizedBox(
+
                               width: 30.0,
                             ),
                             const SizedBox(
@@ -178,6 +183,8 @@ class _HomeState extends State<Home> {
                               child: Text(
                                 "Female",
                                 textAlign: TextAlign.left,
+                                style: TextStyle(color: Colors.black),
+
                               ),
                             ),
                           ],
@@ -185,7 +192,6 @@ class _HomeState extends State<Home> {
                       },
                     ),
                     const SizedBox(height: 20.0),
-                    }'),
                     //InputField Widget from the widgets folder
                     //InputField Widget from the widgets folder
                     InputField(label: "Email", content: "yo@seethat.com", controller: email,),
