@@ -1,5 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:project_management/app/login/screens/home.dart';
+import 'package:project_management/app/login/screens/register.dart';
 
 import 'app/config/routes/app_pages.dart';
 import 'app/config/themes/app_theme.dart';
@@ -19,7 +19,8 @@ Future<void> main() async {
           messagingSenderId: "1088905524845",
           appId: "1:1088905524845:web:a402d7112952c24da4b164",
           measurementId: "G-HBZV1ZHMNK"
-      ));
+      )
+  );
   runApp(const MyApp());
 }
 

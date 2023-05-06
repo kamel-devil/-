@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:awesome_dialog/awesome_dialog.dart' as dialog;
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../config/routes/app_pages.dart';
 import '../widgets/gender.dart';
@@ -16,6 +17,9 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  bool isMale = false;
+  bool isFemale = false;
+  String? gender;
   TextEditingController nameCont = TextEditingController();
 
   TextEditingController email = TextEditingController();
@@ -112,10 +116,76 @@ class _HomeState extends State<Home> {
                     const SizedBox(height: 20.0),
 
                     //Gender Widget from the widgets folder
-                    Gender(),
-
+                    LayoutBuilder(
+                      builder: (BuildContext context, BoxConstraints constraints) {
+                        return Row(
+                          children: <Widget>[
+                            const SizedBox(
+                              width: 50,
+                              child: Text(
+                                "Gender",
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20.0,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isMale = true;
+                                  isFemale = false;
+                                  gender = 'male';
+                                });
+                              },
+                              child: CircleAvatar(
+                                backgroundColor: Colors.blue[50],
+                                child: Icon(Icons.face,
+                                    color: isMale ? Colors.greenAccent : Colors.grey),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 30.0,
+                            ),
+                            const SizedBox(
+                              width: 50.0,
+                              child: Text(
+                                "Male",
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                            InkWell(
+                              onTap: () {
+                                setState(() {
+                                  isFemale = true;
+                                  isMale = false;
+                                  gender = 'female';
+                                });
+                              },
+                              child: CircleAvatar(
+                                backgroundColor: Colors.blue[50],
+                                child: Icon(
+                                  Icons.face,
+                                  color: isFemale ? Colors.greenAccent : Colors.grey,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 30.0,
+                            ),
+                            const SizedBox(
+                              width: 100.0,
+                              child: Text(
+                                "Female",
+                                textAlign: TextAlign.left,
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
                     const SizedBox(height: 20.0),
-
+                    }'),
                     //InputField Widget from the widgets folder
                     //InputField Widget from the widgets folder
                     InputField(label: "Email", content: "yo@seethat.com", controller: email,),
@@ -238,6 +308,7 @@ class _HomeState extends State<Home> {
       'national_id': naID.text,
       'id': user?.uid,
       'image': 'null',
+      'gender':gender,
       'password': pass.text,
       'phone': phone.text,
       'created_at': time,
@@ -247,4 +318,5 @@ class _HomeState extends State<Home> {
       'about': 'Hallo'
     });
   }
+
 }

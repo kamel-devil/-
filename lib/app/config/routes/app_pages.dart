@@ -1,7 +1,7 @@
 import '../../features/dashboard/views/screens/dashboard_screen.dart';
 import 'package:get/get.dart';
 
-import '../../login/screens/home.dart';
+import '../../login/screens/register.dart';
 
 part 'app_routes.dart';
 

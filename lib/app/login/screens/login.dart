@@ -6,7 +6,7 @@ import 'package:flutter_login/flutter_login.dart';
 import 'package:get/get.dart';
 
 import '../../config/routes/app_pages.dart';
-import 'home.dart';
+import 'register.dart';
 
 
 class LoginScreen extends StatelessWidget {
