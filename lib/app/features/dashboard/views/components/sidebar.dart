@@ -33,7 +33,7 @@ class _Sidebar extends StatelessWidget {
                         SelectionButtonData(
                           activeIcon: EvaIcons.archive,
                           icon: EvaIcons.archiveOutline,
-                          label: "Reports",
+                          label: "Contracts",
                         ),
                         SelectionButtonData(
                           activeIcon: EvaIcons.calendar,
@@ -58,7 +58,7 @@ class _Sidebar extends StatelessWidget {
                         ),
                         SelectionButtonData(
                           activeIcon: EvaIcons.settings,
-                          icon: EvaIcons.settingsOutline,
+                          icon: EvaIcons.logOut,
                           label: "Log Out",
                         ),
                       ],
@@ -76,7 +76,13 @@ class _Sidebar extends StatelessWidget {
                                       const ListOfCategory()));
                         } else if (index == 4) {
                         } else if (index == 5) {
-                        } else if (index == 6) {}
+                        } else if (index == 6) {
+                          _signOut().whenComplete(() =>  Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                  const LoginScreen())));
+                        }
                       },
                     );
                   } else {
@@ -95,5 +101,7 @@ class _Sidebar extends StatelessWidget {
       ),
     );
   }
-
+  Future<void> _signOut() async {
+    await FirebaseAuth.instance.signOut();
+  }
 }
