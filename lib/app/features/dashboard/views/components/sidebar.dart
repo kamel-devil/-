@@ -60,7 +60,12 @@ class _Sidebar extends StatelessWidget {
                             AntDesign.edit,
                             color: Colors.black,
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>  ProfileEdit()));
+                          },
                         ).visible(true)
                       ],
                     ).paddingAll(16);
