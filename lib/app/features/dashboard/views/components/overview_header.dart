@@ -2,45 +2,25 @@ part of dashboard;
 
 class _OverviewHeader extends StatelessWidget {
   const _OverviewHeader({
-    required this.onSelected,
     this.axis = Axis.horizontal,
     Key? key,
   }) : super(key: key);
 
-  final Function(TaskType? task) onSelected;
   final Axis axis;
   @override
   Widget build(BuildContext context) {
     final Rx<TaskType?> task = Rx(null);
 
-    return Obx(
-      () => (axis == Axis.horizontal)
-          ? Row(
-              children: [
-                const Text(
-                  "Requests",
-                  style: TextStyle(fontWeight: FontWeight.w600),
-                ),
-                const Spacer(),
-                ..._listButton(
-                  task: task.value,
-                  onSelected: (value) {
-                    task.value = value;
-                    onSelected(value);
-                  },
-                )
-              ],
-            )
-          : Column(
+    return
+      Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const [
                 Text(
                   "Requests",
-                  style: TextStyle(fontWeight: FontWeight.w600),
+                  style: TextStyle(fontWeight: FontWeight.w600,color: Colors.grey),
                 ),
                 SizedBox(height: 10),
               ],
-            ),
     );
   }
 

@@ -56,7 +56,9 @@ class ListOfCategory extends StatelessWidget {
                                       ),
                                       const Spacer(),
                                       IconButton(
-                                          icon: const Icon(Icons.search),
+                                          icon:  Icon(Icons.search,
+                                            color: Theme.of(context).primaryColor,
+                                          ),
                                           onPressed: () {}),
                                       const SizedBox(width: 20),
                                       IconButton(
@@ -83,11 +85,7 @@ class ListOfCategory extends StatelessWidget {
                                             const EdgeInsets.only(bottom: 20),
                                         child: ListTile(
                                           onTap: () {
-                                            // if (deviceScreenType ==
-                                            //         DeviceScreenType.mobile ||
-                                            //     deviceScreenType ==
-                                            //         DeviceScreenType.tablet) {
-                                            // }
+
                                           },
                                           title: Padding(
                                             padding: const EdgeInsets.only(bottom: 8),

@@ -49,6 +49,9 @@ dependencies:
   flutter_login:
   dropdown_search:
   email_validator:
+  flutter_mobx:
+  flutter_vector_icons:
+  nb_utils: ^5.0.8
 dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
@@ -64,8 +67,8 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/raster/.
-    - assets/images/vector/.
+    - assets/images/vector/
+    - assets/images/
     - assets/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
