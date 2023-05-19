@@ -322,7 +322,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   Future getData() async {
     return FirebaseFirestore.instance
-        .collection('users')
+        .collection('craftsman')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
   }
@@ -356,7 +356,7 @@ class _ProfileEditState extends State<ProfileEdit> {
 
       firabase_storage.Reference ref = firabase_storage.FirebaseStorage.instance
           .ref()
-          .child('users')
+          .child('craftsman')
           .child('/$selctFile');
       final metadata =
       firabase_storage.SettableMetadata(contentType: 'image/jpeg');
@@ -369,7 +369,7 @@ class _ProfileEditState extends State<ProfileEdit> {
       print(imageUrl);
       print(FirebaseAuth.instance.currentUser!.uid);
       await FirebaseFirestore.instance
-          .collection('users')
+          .collection('craftsman')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set({
         'image': imageUrl,

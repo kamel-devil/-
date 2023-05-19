@@ -11,7 +11,7 @@ import '../widgets/input_field.dart';
 import 'login.dart';
 
 class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+  const Home({Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -97,13 +97,6 @@ class _HomeState extends State<Home> {
                         const SizedBox(
                           height: 50.0,
                         ),
-                        const CircleAvatar(
-                          backgroundColor: Colors.black87,
-                          child: Text(
-                            ">",
-                            style: TextStyle(color: Colors.yellow),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -115,7 +108,6 @@ class _HomeState extends State<Home> {
                       top: 40.0, right: 70.0, left: 70.0, bottom: 40.0),
                   child: Form(
                     key: formGlobalKey,
-
                     child: Column(
                       children: <Widget>[
                         //InputField Widget from the widgets folder
@@ -125,7 +117,7 @@ class _HomeState extends State<Home> {
                           controller: nameCont,
                           validat: (value) {
                             if (value!.isEmpty) {
-                              return 'Please enter some text';
+                              return 'Please enter Name';
                             }
                             return null;
                           },
@@ -223,8 +215,8 @@ class _HomeState extends State<Home> {
                             },
                             type: TextInputType.emailAddress,
                             validat: (value) {
-                              if (value!.isEmpty&& value.isEmail) {
-                                return 'Please enter some text';
+                              if (value!.isEmpty && !value.isEmail) {
+                                return 'Please enter Email';
                               }
                               return null;
                             }),
@@ -233,12 +225,12 @@ class _HomeState extends State<Home> {
 
                         InputField(
                             label: "Mobile",
-                            content: "+22994684468",
+                            content: "+962784567456",
                             controller: phone,
                             type: TextInputType.phone,
                             validat: (value) {
-                              if (value!.isEmpty && value.isPhoneNumber) {
-                                return 'Please enter some text';
+                              if (value!.isEmpty && !value.isPhoneNumber) {
+                                return 'Please enter phone';
                               }
                               return null;
                             }),
@@ -248,12 +240,12 @@ class _HomeState extends State<Home> {
                         //InputField Widget from the widgets folder
                         InputField(
                             label: "National ID",
-                            content: "22223311111",
+                            content: "2000553387",
                             controller: naID,
                             type: TextInputType.number,
                             validat: (value) {
-                              if (value!.isEmpty&&value.length<16&&value.isNum) {
-                                return 'Please enter some text';
+                              if (value!.isEmpty && (value.length<16)) {
+                                return 'Please enter National ID';
                               }
                               return null;
                             }),
@@ -266,8 +258,8 @@ class _HomeState extends State<Home> {
                             controller: pass,
                             type: TextInputType.text,
                             validat: (value) {
-                              if (value!.isEmpty&&value.length>8) {
-                                return 'Please enter some text';
+                              if (value!.isEmpty && !(value.length>8)) {
+                                return 'Please enter password';
                               }
                               return null;
                             }),
@@ -280,8 +272,8 @@ class _HomeState extends State<Home> {
                             controller: rePass,
                             type: TextInputType.text,
                             validat: (value) {
-                              if (value!.isEmpty&&value.length>8 ) {
-                                return 'Please enter some text';
+                              if (value !=pass.text && value!.isEmpty) {
+                                return 'Please enter same password';
                               }
                               return null;
                             }),

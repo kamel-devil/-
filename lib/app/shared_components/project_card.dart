@@ -18,40 +18,145 @@ class ProjectCardData {
 }
 
 class ProjectCard extends StatelessWidget {
-   ProjectCard({
+  ProjectCard({
     required this.data,
-    Key? key, required this.service,
+    Key? key,
+    required this.service,
   }) : super(key: key);
 
-  final  data;
+  final data;
   final bool service;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        _ProgressIndicator(
-          percent: 0.5,
-          center: _ProfilImage(image: NetworkImage(data['image']??'https://freepngimg.com/thumb/mario/20698-7-mario-transparent-background.png')),
-        ),
-        const SizedBox(width: 10),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _TitleText( service? data['name']:data['services']),
-              const SizedBox(height: 5),
-              Row(
-                children: [
-                   _SubtitleText(service?"Release time : ":'Order By'),
-                  _ReleaseTimeText(service?data['date']:data['user'])
-                ],
-              )
-            ],
+    return InkWell(
+      onTap: () {
+        service
+            ?Container()
+            : Get.defaultDialog(
+            title: 'Contract',
+            content: Column(
+              children: [
+                Row(
+                  children: [
+                    const Text(
+                      'Client : ',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      data['user'],
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      'address : ',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      data['address'],
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      'services : ',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      data['services'],
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      'type : ',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      data['type'],
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Text(
+                      'Information : ',
+                      style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                    Text(
+                      data['info'],
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+              ],
+            )) ;
+      },
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          _ProgressIndicator(
+            percent: 0.5,
+            center: _ProfilImage(
+                image: NetworkImage(data['image'] ??
+                    'https://freepngimg.com/thumb/mario/20698-7-mario-transparent-background.png')),
           ),
-        )
-      ],
+          const SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _TitleText(service ? data['name'] : data['services']),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    _SubtitleText(service ? "Release time : " : 'Order By'),
+                    _ReleaseTimeText(service ? data['date'] : data['user'])
+                  ],
+                )
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

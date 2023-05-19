@@ -21,22 +21,21 @@ class LoginScreen extends StatelessWidget {
     );
 
     return FlutterLogin(
-      title: 'Herafy',
-
       logo: 'assets/logo.png',
       children: [
         Padding(
-          padding: const EdgeInsets.only(top: 200.0),
+          padding: const EdgeInsets.only(top: 400.0),
           child: InkWell(
               onTap: (){
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) =>  Home()),
                 );            },
-              child: Text('Register')),
+              child: Text('Register',style: TextStyle(color: Colors.blue,fontSize: 24),)),
         )
 
       ],
+
       onLogin: (lData) {
         login1(lData.name, lData.password, context: context);
         return null;
@@ -117,7 +116,7 @@ class LoginScreen extends StatelessWidget {
           // shape: ContinuousRectangleBorder(borderRadius: BorderRadius.circular(55.0)),
         ),
 
-        
+
       ),
       onRecoverPassword: (String) {
 
