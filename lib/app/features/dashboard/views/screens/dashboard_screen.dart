@@ -277,88 +277,7 @@ class DashboardScreen extends GetView<DashboardController> {
     );
   }
 
-  Widget _buildProgress({Axis axis = Axis.horizontal}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-      child: (axis == Axis.horizontal)
-          ? FutureBuilder(
-              future: getServices(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List count = snapshot.data as List;
-                  return Row(
-                    children: [
-                      Flexible(
-                        flex: 5,
-                        child: ProgressCard(
-                          data: ProgressCardData(
-                            totalUndone: count.length,
-                            totalTaskInProress: 2,
-                          ),
-                          onPressedCheck: () {},
-                        ),
-                      ),
-                      const SizedBox(width: kSpacing / 2),
-                      Flexible(
-                        flex: 4,
-                        child: ProgressReportCard(
-                          data: ProgressReportCardData(
-                            title: "All Order",
-                            doneTask: 5,
-                            percent: .3,
-                            task: count.length,
-                            undoneTask: 2,
-                          ),
-                        ),
-                      ),
-                    ],
-                  );
-                } else {
-                  return const Center(child: CircularProgressIndicator());
-                }
-              })
-          : Column(
-              children: [
-                ProgressCard(
-                  data: const ProgressCardData(
-                    totalUndone: 10,
-                    totalTaskInProress: 2,
-                  ),
-                  onPressedCheck: () {},
-                ),
-                const SizedBox(height: kSpacing / 2),
-                const ProgressReportCard(
-                  data: ProgressReportCardData(
-                    title: "1st Sprint",
-                    doneTask: 5,
-                    percent: .3,
-                    task: 3,
-                    undoneTask: 2,
-                  ),
-                ),
-              ],
-            ),
-    );
-  }
 
-  Future getServices() async {
-    var firestore = FirebaseFirestore.instance;
-    QuerySnapshot qn = await firestore
-        .collection("craftsman")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('services')
-        .get();
-    return qn.docs;
-  }
-  Future getInfoProfile() async {
-    var firestore = FirebaseFirestore.instance;
-    QuerySnapshot qn = await firestore
-        .collection("craftsman")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('services')
-        .get();
-    return qn.docs;
-  }
 
   Widget _buildTaskOverview({
     required List data,
@@ -419,26 +338,6 @@ class DashboardScreen extends GetView<DashboardController> {
           staggeredTileBuilder: (int index) =>
               StaggeredTile.fit(crossAxisCellCount),
         ),
-      ),
-    );
-  }
-
-  Future getMyServices() async {
-    var firestore = FirebaseFirestore.instance;
-    QuerySnapshot qn = await firestore
-        .collection("craftsman")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('services')
-        .get();
-    return qn.docs;
-  }
-
-  Widget _buildProfile({required _Profile data}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-      child: _ProfilTile(
-        data: data,
-        onPressedNotification: () {},
       ),
     );
   }

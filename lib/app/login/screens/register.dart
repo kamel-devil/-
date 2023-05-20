@@ -389,6 +389,7 @@ class _HomeState extends State<Home> {
       'id': user?.uid,
       'image': 'null',
       'gender': gender,
+      'count':0,
       'password': pass.text,
       'phone': phone.text,
       'created_at': time,

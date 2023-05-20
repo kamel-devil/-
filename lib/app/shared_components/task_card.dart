@@ -128,6 +128,19 @@ class TaskCard extends StatelessWidget {
                         },
                         SetOptions(merge: true),
                       );
+                      await FirebaseFirestore.instance
+                          .collection('craftsman')
+                          .doc(FirebaseAuth.instance.currentUser!.uid).get().then((value) {
+                        FirebaseFirestore.instance
+                            .collection('craftsman')
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .set(
+                          {
+                            'count': value['count'] + 1,
+                          },
+                          SetOptions(merge: true),
+                        );
+                      });
                     },
                     child: const Text(
                       'Reject',

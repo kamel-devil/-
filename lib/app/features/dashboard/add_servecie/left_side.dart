@@ -34,7 +34,7 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
     return Expanded(
         child: Center(
       child: Padding(
-        padding: const EdgeInsets.all(120.0),
+        padding: const EdgeInsets.all(16.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
@@ -46,16 +46,6 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w900,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              const Text(
-                "The safest site on the web for storing your data!",
-                style: TextStyle(
-                  fontSize: 12,
                   color: Colors.black,
                 ),
               ),
@@ -150,7 +140,7 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
                   alignLabelWithHint: true,
                   hintMaxLines: 3,
                   label: Text(
-                    "Description Name",
+                    "Description",
                     style: TextStyle(
                       color: Colors.black,
                     ),
