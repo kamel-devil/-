@@ -26,7 +26,6 @@ class _ActiveProjectCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _title(title),
-                _seeAllButton(onPressed: onPressedSeeAll),
               ],
             ),
             const Divider(
@@ -48,11 +47,4 @@ class _ActiveProjectCard extends StatelessWidget {
     );
   }
 
-  Widget _seeAllButton({required Function() onPressed}) {
-    return TextButton(
-      onPressed: onPressed,
-      child: const Text("+"),
-      style: TextButton.styleFrom(primary: kFontColorPallets[1]),
-    );
-  }
 }

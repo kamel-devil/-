@@ -118,8 +118,8 @@ class LoginScreen extends StatelessWidget {
 
 
       ),
-      onRecoverPassword: (String) {
-
+      onRecoverPassword: (email) {
+        resetPassword(email);
       },
     );
   }
@@ -159,6 +159,13 @@ class LoginScreen extends StatelessWidget {
       }
     } catch (e) {
       print(e);
+    }
+  }
+  Future<void> resetPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } catch (e) {
+      print(e.toString());
     }
   }
 }

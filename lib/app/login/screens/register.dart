@@ -84,16 +84,6 @@ class _HomeState extends State<Home> {
                         const SizedBox(
                           height: 5.0,
                         ),
-                        Container(
-                          padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
-                          child: const Text(
-                            "It should only take a couple of minutes to pair with your watch",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
                         const SizedBox(
                           height: 50.0,
                         ),
@@ -228,12 +218,15 @@ class _HomeState extends State<Home> {
                             content: "+962784567456",
                             controller: phone,
                             type: TextInputType.phone,
-                            validat: (value) {
-                              if (value!.isEmpty && !value.isPhoneNumber) {
-                                return 'Please enter phone';
-                              }
+                          validat: (val) {
+                            if (!val!.startsWith("078") &&
+                                !val.startsWith("077") &&
+                                !val.startsWith("079")) {
+                              return 'Invalid Phone Number ';
+                            } else {
                               return null;
-                            }),
+                            }
+                          },),
 
                         const SizedBox(height: 20.0),
 
@@ -243,12 +236,13 @@ class _HomeState extends State<Home> {
                             content: "2000553387",
                             controller: naID,
                             type: TextInputType.number,
-                            validat: (value) {
-                              if (value!.isEmpty && (value.length<16)) {
-                                return 'Please enter National ID';
-                              }
+                          validat: (val) {
+                            if (val!.length < 10) {
+                              return 'Invalid National ID';
+                            } else {
                               return null;
-                            }),
+                            }
+                          },),
                         const SizedBox(height: 20.0),
 
                         //InputField Widget from the widgets folder

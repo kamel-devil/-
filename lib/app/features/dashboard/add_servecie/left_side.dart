@@ -184,22 +184,36 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
                 ),
               ),
               const SizedBox(height: 24),
-              MaterialButton(
-                onPressed: () {
-                  print(supName);
+              StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection('craftsman')
+                      .doc(FirebaseAuth.instance.currentUser!.uid)
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot snapshot) {
+                    if (snapshot.hasData) {
+                      var data1 = snapshot.data;
+                      return data1['accept']
+                          ? MaterialButton(
+                              onPressed: () {
+                                print(supName);
 
-                  uploadFile();
-                  Navigator.pop(context);
-                },
-                minWidth: double.infinity,
-                height: 52,
-                elevation: 24,
-                color: const Color(0xFF03DAC5),
-                textColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(32)),
-                child: const Text("Add"),
-              )
+                                uploadFile();
+                                Navigator.pop(context);
+                              },
+                              minWidth: double.infinity,
+                              height: 52,
+                              elevation: 24,
+                              color: const Color(0xFF03DAC5),
+                              textColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(32)),
+                              child: const Text("Add"),
+                            )
+                          : Container();
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  })
             ],
           ),
         ),
@@ -253,10 +267,10 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
       imageUrl = await ref.getDownloadURL();
       addPost.add({
         'image': imageUrl,
-        'isAccept': false,
+        'isAccept': 0,
         "name": service.text,
         "des": des.text,
-        'id':docId2,
+        'id': docId2,
         'type': supName!,
         'uid': FirebaseAuth.instance.currentUser!.uid,
         'price': price.text,
@@ -274,7 +288,7 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
             .doc(docId2)
             .set({
           'image': imageUrl,
-          'isAccept': false,
+          'isAccept': 0,
           'id': docId2,
           "name": service.text,
           "des": des.text,

@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'left_side.dart';
 import 'right_side.dart';
 
-class Category extends StatelessWidget {
-  const Category({Key? key}) : super(key: key);
+class Service extends StatelessWidget {
+  const Service({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

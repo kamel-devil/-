@@ -208,7 +208,28 @@ class ListOfRequested extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          trailing:  Text(category[index]['date'].toString(),style: const TextStyle(color: Colors.black),),
+                                          trailing:  Column(
+                                            children: [
+                                              Text(category[index]['date'].toString(),style: const TextStyle(color: Colors.black),),
+                                              category[index]['isAccept']==0?
+                                              const Text(
+                                                'Wait',
+                                                style:
+                                                TextStyle(color: Colors.black),
+                                              ):
+                                              category[index]['isAccept']==1?
+                                              const Text(
+                                                'Accept',
+                                                style:
+                                                TextStyle(color: Colors.green),
+                                              ):
+                                              const Text(
+                                                'Reject',
+                                                style:
+                                                TextStyle(color: Colors.red),
+                                              )
+                                            ],
+                                          ),
                                           subtitle: const Text(''),
                                         ),
                                       ),

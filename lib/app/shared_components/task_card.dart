@@ -35,7 +35,7 @@ class TaskCard extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final  data;
+  final data;
 
   final Function() onPressedMore;
   final Function() onPressedTask;
@@ -58,108 +58,111 @@ class TaskCard extends StatelessWidget {
               child: _Tile(
                 dotColor: Colors.white,
                 title: data['services'],
-                subtitle:
-                data['type']
-                  ,
+                subtitle: data['type'],
                 onPressedMore: onPressedMore,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      primary: Colors.green,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    onPressed: () async {
-                      await FirebaseFirestore.instance
-                          .collection('craftsman')
-                          .doc(FirebaseAuth.instance.currentUser!.uid).collection('requests').doc(data['id'])
-                          .set(
-                        {
-                          'isAccept': 1,
-                        },
-                        SetOptions(merge: true),
-                      );
-                      await FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(data['userUid']).collection('request').doc(data['userDocID'])
-                          .set(
-                        {
-                          'isAccept': 1,
-                        },
-                        SetOptions(merge: true),
-                      );
-                    },
-                    child: const Text(
-                      'Accept',
-                    ),
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0,
-                      primary:Colors.red,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                    ),
-                    onPressed: () async {
-                      await FirebaseFirestore.instance
-                          .collection('craftsman')
-                          .doc(FirebaseAuth.instance.currentUser!.uid).collection('requests').doc(data['id'])
-                          .set(
-                        {
-                          'isAccept': 2,
-                        },
-                        SetOptions(merge: true),
-                      );
-                      await FirebaseFirestore.instance
-                          .collection('users')
-                          .doc(data['userUid']).collection('request').doc(data['userDocID'])
-                          .set(
-                        {
-                          'isAccept': 2,
-                        },
-                        SetOptions(merge: true),
-                      );
-                      await FirebaseFirestore.instance
-                          .collection('craftsman')
-                          .doc(FirebaseAuth.instance.currentUser!.uid).get().then((value) {
-                        FirebaseFirestore.instance
-                            .collection('craftsman')
-                            .doc(FirebaseAuth.instance.currentUser!.uid)
-                            .set(
-                          {
-                            'count': value['count'] + 1,
-                          },
-                          SetOptions(merge: true),
-                        );
-                      });
-                    },
-                    child: const Text(
-                      'Reject',
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(1),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Theme.of(Get.context!).cardColor,
-                    ),
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(data['image']),
-                      radius: 15,
-                    ),
-                  )
-                ],
-              ),
-            ),
+            StreamBuilder(builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                var data1 = snapshot.data;
+                return data1['accept']
+                    ? Padding(
+                        padding:
+                            const EdgeInsets.symmetric(horizontal: kSpacing),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                primary: Colors.green,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              onPressed: () async {
+                                await FirebaseFirestore.instance
+                                    .collection('craftsman')
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .collection('requests')
+                                    .doc(data['id'])
+                                    .set(
+                                  {
+                                    'isAccept': 1,
+                                  },
+                                  SetOptions(merge: true),
+                                );
+                                await FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(data['userUid'])
+                                    .collection('request')
+                                    .doc(data['userDocID'])
+                                    .set(
+                                  {
+                                    'isAccept': 1,
+                                  },
+                                  SetOptions(merge: true),
+                                );
+                              },
+                              child: const Text(
+                                'Accept',
+                              ),
+                            ),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                primary: Colors.red,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                              ),
+                              onPressed: () async {
+                                await FirebaseFirestore.instance
+                                    .collection('craftsman')
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .collection('requests')
+                                    .doc(data['id'])
+                                    .set(
+                                  {
+                                    'isAccept': 2,
+                                  },
+                                  SetOptions(merge: true),
+                                );
+                                await FirebaseFirestore.instance
+                                    .collection('users')
+                                    .doc(data['userUid'])
+                                    .collection('request')
+                                    .doc(data['userDocID'])
+                                    .set(
+                                  {
+                                    'isAccept': 2,
+                                  },
+                                  SetOptions(merge: true),
+                                );
+                              },
+                              child: const Text(
+                                'Reject',
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(1),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Theme.of(Get.context!).cardColor,
+                              ),
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(data['image']),
+                                radius: 15,
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : Container();
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            }),
             const SizedBox(height: kSpacing / 2),
           ],
         ),

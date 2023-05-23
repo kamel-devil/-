@@ -25,8 +25,9 @@ import 'package:get/get.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../../../../login/screens/login.dart';
-import '../../add_servecie/category.dart';
-import '../../add_servecie/listofcategory.dart';
+import '../../add_servecie/service.dart';
+import '../../add_servecie/listofservice.dart';
+import '../change_password.dart';
 import '../contract.dart';
 import '../profile.dart';
 

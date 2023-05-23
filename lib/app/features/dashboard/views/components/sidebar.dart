@@ -64,7 +64,7 @@ class _Sidebar extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>  ProfileEdit()));
+                                    builder: (context) =>  ProfileEdit(phone: data['phone'], name: data['name'], image:data['image'], gender: data['gender'],)));
                           },
                         ).visible(true)
                       ],
@@ -98,11 +98,6 @@ class _Sidebar extends StatelessWidget {
                           return SelectionButton(
                             data: [
                               SelectionButtonData(
-                                activeIcon: EvaIcons.grid,
-                                icon: EvaIcons.gridOutline,
-                                label: "Dashboard",
-                              ),
-                              SelectionButtonData(
                                 activeIcon: EvaIcons.archive,
                                 icon: EvaIcons.archiveOutline,
                                 label: "Contracts",
@@ -121,9 +116,9 @@ class _Sidebar extends StatelessWidget {
                                 totalNotif: count.length,
                               ),
                               SelectionButtonData(
-                                activeIcon: EvaIcons.settings,
+                                activeIcon: EvaIcons.refresh,
                                 icon: EvaIcons.settingsOutline,
-                                label: "Setting",
+                                label: "Change Password",
                               ),
                               SelectionButtonData(
                                 activeIcon: EvaIcons.settings,
@@ -132,30 +127,32 @@ class _Sidebar extends StatelessWidget {
                               ),
                             ],
                             onSelected: (index, value) {
-
                               if (index == 0) {
-                              }
-                              else if (index == 1) {
 
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => const ListOfRequested()));
                               }
+                              else if (index == 1) {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Service()));
+                              }
                               else if (index == 2) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const Category()));
-                              }
-                              else if (index == 3) {
+                                        builder: (context) =>
+                                        const ListOfService()));
+                              } else if (index == 3) {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                        const ListOfCategory()));
+                                        const DTChangePasswordScreen()));
                               } else if (index == 4) {
-                              } else if (index == 5) {
                                 _signOut().whenComplete(() =>  Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
