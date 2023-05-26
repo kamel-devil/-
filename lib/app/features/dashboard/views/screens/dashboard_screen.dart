@@ -42,11 +42,17 @@ part '../../models/profile.dart';
 
 // component
 part '../components/active_project_card.dart';
+
 part '../components/header.dart';
+
 part '../components/overview_header.dart';
+
 part '../components/profile_tile.dart';
+
 part '../components/recent_messages.dart';
+
 part '../components/sidebar.dart';
+
 part '../components/team_member.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
@@ -89,11 +95,10 @@ class DashboardScreen extends GetView<DashboardController> {
                     return _buildTaskOverview(
                       data: data,
                       crossAxisCount: 6,
-                      crossAxisCellCount:6,
+                      crossAxisCellCount: 6,
                     );
                   } else {
-                    return const Center(
-                        child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   }
                 }),
 
@@ -131,8 +136,8 @@ class DashboardScreen extends GetView<DashboardController> {
                               crossAxisCellCount: (constraints.maxWidth < 950)
                                   ? 6
                                   : (constraints.maxWidth < 1100)
-                                  ? 3
-                                  : 2,
+                                      ? 3
+                                      : 2,
                             );
                           } else {
                             return const Center(
@@ -268,7 +273,10 @@ class DashboardScreen extends GetView<DashboardController> {
               padding: const EdgeInsets.only(right: kSpacing),
               child: IconButton(
                 onPressed: onPressedMenu,
-                icon: const Icon(EvaIcons.menu,color: Colors.black,),
+                icon: const Icon(
+                  EvaIcons.menu,
+                  color: Colors.black,
+                ),
                 tooltip: "menu",
               ),
             ),
@@ -277,8 +285,6 @@ class DashboardScreen extends GetView<DashboardController> {
       ),
     );
   }
-
-
 
   Widget _buildTaskOverview({
     required List data,
