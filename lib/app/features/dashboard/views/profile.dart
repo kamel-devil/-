@@ -110,11 +110,12 @@ class _ProfileEditState extends State<ProfileEdit> {
                                           offset: const Offset(0, 10))
                                     ],
                                     shape: BoxShape.circle,
-                                    image: const DecorationImage(
+                                    image:  DecorationImage(
                                         fit: BoxFit.cover,
-                                        image: NetworkImage(
-                                          "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
-                                        ))),
+                                        image:isMale
+                                            ?  const AssetImage('assets/images/man.png')
+                                            : const AssetImage(
+                                            'assets/images/woman.png'))),
                               )
                             : Container(
                                 width: 130,
