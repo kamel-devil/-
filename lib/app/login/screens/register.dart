@@ -3,7 +3,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../config/routes/app_pages.dart';
@@ -34,7 +33,7 @@ class _HomeState extends State<Home> {
   TextEditingController naID = TextEditingController();
 
   TextEditingController phone = TextEditingController();
-  final formGlobalKey = GlobalKey < FormState > ();
+  final formGlobalKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -118,8 +117,8 @@ class _HomeState extends State<Home> {
 
                         //Gender Widget from the widgets folder
                         LayoutBuilder(
-                          builder:
-                              (BuildContext context, BoxConstraints constraints) {
+                          builder: (BuildContext context,
+                              BoxConstraints constraints) {
                             return Row(
                               children: <Widget>[
                                 const SizedBox(
@@ -200,7 +199,7 @@ class _HomeState extends State<Home> {
                             label: "Email",
                             content: "yo@seethat.com",
                             controller: email,
-                            onchange: (val){
+                            onchange: (val) {
                               validateEmail(val);
                             },
                             type: TextInputType.emailAddress,
@@ -214,10 +213,10 @@ class _HomeState extends State<Home> {
                         const SizedBox(height: 20.0),
 
                         InputField(
-                            label: "Mobile",
-                            content: "+962784567456",
-                            controller: phone,
-                            type: TextInputType.phone,
+                          label: "Mobile",
+                          content: "+962784567456",
+                          controller: phone,
+                          type: TextInputType.phone,
                           validat: (val) {
                             if (!val!.startsWith("078") &&
                                 !val.startsWith("077") &&
@@ -226,23 +225,25 @@ class _HomeState extends State<Home> {
                             } else {
                               return null;
                             }
-                          },),
+                          },
+                        ),
 
                         const SizedBox(height: 20.0),
 
                         //InputField Widget from the widgets folder
                         InputField(
-                            label: "National ID",
-                            content: "2000553387",
-                            controller: naID,
-                            type: TextInputType.number,
+                          label: "National ID",
+                          content: "2000553387",
+                          controller: naID,
+                          type: TextInputType.number,
                           validat: (val) {
-                            if (val!.length < 10) {
+                            if (val!.length != 10) {
                               return 'Invalid National ID';
                             } else {
                               return null;
                             }
-                          },),
+                          },
+                        ),
                         const SizedBox(height: 20.0),
 
                         //InputField Widget from the widgets folder
@@ -252,7 +253,7 @@ class _HomeState extends State<Home> {
                             controller: pass,
                             type: TextInputType.text,
                             validat: (value) {
-                              if (value!.isEmpty && !(value.length>8)) {
+                              if (value!.isEmpty && !(value.length < 8)) {
                                 return 'Please enter password';
                               }
                               return null;
@@ -261,16 +262,18 @@ class _HomeState extends State<Home> {
 
                         //InputField Widget from the widgets folder
                         InputField(
-                            label: "Re-Enter Password",
-                            content: "********",
-                            controller: rePass,
-                            type: TextInputType.text,
-                            validat: (value) {
-                              if (value !=pass.text && value!.isEmpty) {
-                                return 'Please enter same password';
-                              }
+                          label: "Re-Enter Password",
+                          content: "********",
+                          controller: rePass,
+                          type: TextInputType.text,
+                          validat: (val) {
+                            if (val!.length < 8) {
+                              return 'Error password';
+                            } else {
                               return null;
-                            }),
+                            }
+                          },
+                        ),
                         const SizedBox(
                           height: 40.0,
                         ),
@@ -309,7 +312,6 @@ class _HomeState extends State<Home> {
                                     Get.toNamed(AppPages.initial);
                                     addDataEmail();
                                   });
-
                                 }
 
                                 // Get.lazyPut(() => DashboardController());
@@ -383,7 +385,7 @@ class _HomeState extends State<Home> {
       'id': user?.uid,
       'image': 'null',
       'gender': gender,
-      'count':0,
+      'count': 0,
       'password': pass.text,
       'phone': phone.text,
       'created_at': time,

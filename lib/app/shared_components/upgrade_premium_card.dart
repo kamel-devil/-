@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:get/get.dart';
 import 'package:project_management/app/constans/app_constants.dart';
 
 class UpgradePremiumCard extends StatelessWidget {

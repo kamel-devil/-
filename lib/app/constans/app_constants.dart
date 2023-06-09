@@ -2,7 +2,6 @@ library app_constants;
 
 import 'package:flutter/cupertino.dart';
 
-part 'api_path.dart';
 part 'assets_path.dart';
 
 const kBorderRadius = 20.0;

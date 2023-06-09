@@ -1,11 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
-import 'package:project_management/app/login/screens/register.dart';
-
-import 'app/config/routes/app_pages.dart';
-import 'app/config/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'app/config/routes/app_pages.dart';
+import 'app/config/themes/app_theme.dart';
 import 'app/login/screens/login.dart';
 
 Future<void> main() async {

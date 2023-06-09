@@ -281,7 +281,7 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
           FirebaseFirestore.instance.collection('allService').doc().id;
       await uploadTask.whenComplete(() => null);
       imageUrl = await ref.getDownloadURL();
-      addPost.add({
+      addPost.doc(docId2).set({
         'image': imageUrl,
         'isAccept': 0,
         "name": service.text,
