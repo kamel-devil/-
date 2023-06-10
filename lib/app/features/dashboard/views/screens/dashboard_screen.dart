@@ -161,7 +161,7 @@ class DashboardScreen extends GetView<DashboardController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                flex: (constraints.maxWidth < 1360) ? 4 : 3,
+                flex: (constraints.maxWidth < 1360) ? 4 : 4,
                 child: const ClipRRect(
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(kBorderRadius),
