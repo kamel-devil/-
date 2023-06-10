@@ -3,11 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class ListOfRequested extends StatelessWidget {
-
-  const ListOfRequested({Key? key, })
-      : super(key: key);
+  const ListOfRequested({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +48,14 @@ class ListOfRequested extends StatelessWidget {
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 19,
-                                            color: Colors.black
-
-                                        ),
+                                            color: Colors.black),
                                       ),
                                       const Spacer(),
                                       IconButton(
-                                          icon:  Icon(Icons.search,
-                                            color: Theme.of(context).primaryColor,
+                                          icon: Icon(
+                                            Icons.search,
+                                            color:
+                                                Theme.of(context).primaryColor,
                                           ),
                                           onPressed: () {}),
                                     ],
@@ -65,226 +64,329 @@ class ListOfRequested extends StatelessWidget {
                                   Column(
                                     children: List.generate(
                                       category.length,
-                                          (index) => Container(
+                                      (index) => Container(
                                         margin:
-                                        const EdgeInsets.only(bottom: 20),
+                                            const EdgeInsets.only(bottom: 20),
                                         child: ListTile(
                                           onTap: () {
                                             Get.defaultDialog(
                                                 title: 'Contract',
                                                 content: Padding(
-                                                  padding: const EdgeInsets.all(80.0),
+                                                  padding: const EdgeInsets.all(
+                                                      80.0),
                                                   child: SingleChildScrollView(
                                                     child: Column(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
                                                       children: [
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'Client : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                             Text(
-                                                              category[index]['user'],
+                                                              category[index]
+                                                                  ['user'],
                                                               style: const TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ],
                                                         ),
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'address : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                             Text(
-                                                              category[index]['address'],
+                                                              category[index]
+                                                                  ['address'],
                                                               style: const TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ],
                                                         ),
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'services : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                             Text(
-                                                              category[index]['services'],
+                                                              category[index]
+                                                                  ['services'],
                                                               style: const TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ],
                                                         ),
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'type : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                             Text(
-                                                              category[index]['type'],
+                                                              category[index]
+                                                                  ['type'],
                                                               style: const TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ],
                                                         ),
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'Information : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                             Text(
-                                                              category[index]['info'],
+                                                              category[index]
+                                                                  ['info'],
                                                               style: const TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ],
                                                         ),
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'time : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                             Text(
-                                                              category[index]['date'],
+                                                              category[index]
+                                                                  ['date'],
                                                               style: const TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ],
                                                         ),
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'price : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                             Text(
-                                                              category[index]['price'],
+                                                              category[index]
+                                                                  ['price'],
                                                               style: const TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ],
                                                         ),
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'hours : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                             Text(
-                                                              category[index]['hours'],
+                                                              category[index]
+                                                                  ['hours'],
                                                               style: const TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ],
                                                         ),
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'Total Price : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                             Text(
-                                                              '${double.parse( category[index]['price']) * double.parse( category[index]['hours'])}',
+                                                              '${double.parse(category[index]['price']) * double.parse(category[index]['hours'])}',
                                                               style: const TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
                                                           ],
                                                         ),
                                                         Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
                                                           children: [
                                                             const Text(
                                                               'payment : ',
                                                               style: TextStyle(
                                                                   fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color: Colors
+                                                                      .white),
                                                             ),
-                                                            category[index]['cash'] == 0
+                                                            category[index][
+                                                                        'cash'] ==
+                                                                    0
                                                                 ? const Text(
-                                                              'Paiement when recieving',
-                                                              style: TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
-                                                            )
+                                                                    'Paiement when recieving',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        color: Colors
+                                                                            .white),
+                                                                  )
                                                                 : const Text(
-                                                              'Payment by card',
-                                                              style: TextStyle(
-                                                                  fontSize: 14,
-                                                                  fontWeight: FontWeight.bold,
-                                                                  color: Colors.white),
-                                                            ),
+                                                                    'Payment by card',
+                                                                    style: TextStyle(
+                                                                        fontSize:
+                                                                            14,
+                                                                        fontWeight:
+                                                                            FontWeight
+                                                                                .bold,
+                                                                        color: Colors
+                                                                            .white),
+                                                                  ),
                                                           ],
                                                         ),
                                                         const SizedBox(
                                                           height: 100,
                                                         ),
                                                         ElevatedButton(
-                                                          style: ElevatedButton.styleFrom(
+                                                          style: ElevatedButton
+                                                              .styleFrom(
                                                             elevation: 0,
                                                             primary: Colors.red,
-                                                            shape: RoundedRectangleBorder(
-                                                              borderRadius: BorderRadius.circular(30),
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          30),
                                                             ),
                                                           ),
                                                           onPressed: () async {
@@ -343,70 +445,98 @@ class ListOfRequested extends StatelessWidget {
                                                             showDialog<void>(
                                                               context: context,
                                                               barrierDismissible:
-                                                              false, // user must tap button!
-                                                              builder: (BuildContext context) {
+                                                                  false,
+                                                              // user must tap button!
+                                                              builder:
+                                                                  (BuildContext
+                                                                      context) {
                                                                 return AlertDialog(
                                                                   // <-- SEE HERE
-                                                                  title: const Text('Cancel booking'),
-                                                                  content: SingleChildScrollView(
-                                                                    child: ListBody(
-                                                                      children: const <Widget>[
+                                                                  title: const Text(
+                                                                      'Cancel booking'),
+                                                                  content:
+                                                                      SingleChildScrollView(
+                                                                    child:
+                                                                        ListBody(
+                                                                      children: const <
+                                                                          Widget>[
                                                                         Text(
                                                                             'Are you sure want to cancel booking?'),
                                                                       ],
                                                                     ),
                                                                   ),
-                                                                  actions: <Widget>[
+                                                                  actions: <
+                                                                      Widget>[
                                                                     TextButton(
-                                                                      child: const Text('No'),
-                                                                      onPressed: () {
-                                                                        Navigator.of(context).pop();
+                                                                      child: const Text(
+                                                                          'No'),
+                                                                      onPressed:
+                                                                          () {
+                                                                        Navigator.of(context)
+                                                                            .pop();
                                                                       },
                                                                     ),
                                                                     TextButton(
-                                                                      child: const Text('Yes'),
-                                                                      onPressed: () async {
-                                                                        await FirebaseFirestore.instance
+                                                                      child: const Text(
+                                                                          'Yes'),
+                                                                      onPressed:
+                                                                          () async {
+                                                                        await FirebaseFirestore
+                                                                            .instance
                                                                             .collection('craftsman')
-                                                                            .doc(FirebaseAuth
-                                                                            .instance.currentUser!.uid)
+                                                                            .doc(FirebaseAuth.instance.currentUser!.uid)
                                                                             .collection('requests')
-                                                                            .doc( category[index]['id'])
+                                                                            .doc(category[index]['id'])
                                                                             .set(
                                                                           {
-                                                                            'isAccept': 2,
+                                                                            'isAccept':
+                                                                                2,
                                                                           },
-                                                                          SetOptions(merge: true),
+                                                                          SetOptions(
+                                                                              merge: true),
                                                                         );
-                                                                        await FirebaseFirestore.instance
+                                                                        await FirebaseFirestore
+                                                                            .instance
                                                                             .collection('users')
-                                                                            .doc( category[index]['userUid'])
+                                                                            .doc(category[index]['userUid'])
                                                                             .collection('request')
-                                                                            .doc( category[index]['userDocID'])
+                                                                            .doc(category[index]['userDocID'])
                                                                             .set(
                                                                           {
-                                                                            'isAccept': 2,
+                                                                            'isAccept':
+                                                                                2,
                                                                           },
-                                                                          SetOptions(merge: true),
+                                                                          SetOptions(
+                                                                              merge: true),
                                                                         );
-                                                                        await FirebaseFirestore.instance
-                                                                            .collection('craftsman')
+                                                                        await FirebaseFirestore
+                                                                            .instance
+                                                                            .collection(
+                                                                                'craftsman')
                                                                             .doc(FirebaseAuth
-                                                                            .instance.currentUser!.uid)
+                                                                                .instance.currentUser!.uid)
                                                                             .get()
-                                                                            .then((value) {
-                                                                          FirebaseFirestore.instance
+                                                                            .then(
+                                                                                (value) {
+                                                                          FirebaseFirestore
+                                                                              .instance
                                                                               .collection('craftsman')
-                                                                              .doc(FirebaseAuth
-                                                                              .instance.currentUser!.uid)
+                                                                              .doc(FirebaseAuth.instance.currentUser!.uid)
                                                                               .set(
                                                                             {
                                                                               'count': value['count'] + 1,
                                                                             },
                                                                             SetOptions(merge: true),
                                                                           );
-                                                                        }).whenComplete(
-                                                                                () => Navigator.pop(context));
+                                                                        }).whenComplete(() =>
+                                                                                Navigator.pop(context));
+                                                                        await FirebaseFirestore
+                                                                            .instance
+                                                                            .collection("craftsman")
+                                                                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                                                                            .collection('requests')
+                                                                            .doc(category[index]['id'])
+                                                                            .delete();
                                                                       },
                                                                     ),
                                                                   ],
@@ -424,25 +554,29 @@ class ListOfRequested extends StatelessWidget {
                                                 ));
                                           },
                                           title: Padding(
-                                            padding: const EdgeInsets.only(bottom: 8),
+                                            padding: const EdgeInsets.only(
+                                                bottom: 8),
                                             child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 Text(
                                                   category[index]['services'],
-                                                  style: const TextStyle(fontSize: 18,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Colors.black
-
-                                                  ),
+                                                  style: const TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black),
                                                 ),
                                                 Text(
                                                   category[index]['info'],
-                                                  style: const TextStyle(fontSize: 14,
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Colors.black
-                                                  ),
+                                                  style: const TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Colors.black),
                                                 ),
                                               ],
                                             ),
@@ -452,7 +586,7 @@ class ListOfRequested extends StatelessWidget {
                                             width: 50,
                                             decoration: BoxDecoration(
                                               borderRadius:
-                                              BorderRadius.circular(10),
+                                                  BorderRadius.circular(10),
                                               image: DecorationImage(
                                                 fit: BoxFit.cover,
                                                 image: NetworkImage(
@@ -461,26 +595,35 @@ class ListOfRequested extends StatelessWidget {
                                               ),
                                             ),
                                           ),
-                                          trailing:  Column(
+                                          trailing: Column(
                                             children: [
-                                              Text(category[index]['date'].toString(),style: const TextStyle(color: Colors.black),),
-                                              category[index]['isAccept']==0?
-                                              const Text(
-                                                'Wait',
-                                                style:
-                                                TextStyle(color: Colors.black),
-                                              ):
-                                              category[index]['isAccept']==1?
-                                              const Text(
-                                                'Accept',
-                                                style:
-                                                TextStyle(color: Colors.green),
-                                              ):
-                                              const Text(
-                                                'Reject',
-                                                style:
-                                                TextStyle(color: Colors.red),
-                                              )
+                                              Text(
+                                                category[index]['date']
+                                                    .toString(),
+                                                style: const TextStyle(
+                                                    color: Colors.black),
+                                              ),
+                                              category[index]['isAccept'] == 0
+                                                  ? const Text(
+                                                      'Wait',
+                                                      style: TextStyle(
+                                                          color: Colors.black),
+                                                    )
+                                                  : category[index]
+                                                              ['isAccept'] ==
+                                                          1
+                                                      ? const Text(
+                                                          'Accept',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.green),
+                                                        )
+                                                      : const Text(
+                                                          'Reject',
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.red),
+                                                        )
                                             ],
                                           ),
                                           subtitle: const Text(''),
@@ -495,12 +638,14 @@ class ListOfRequested extends StatelessWidget {
                           const SizedBox(height: 20),
                           Row(
                             children: const [
-                              Icon(Icons.feedback,color: Colors.black,),
+                              Icon(
+                                Icons.feedback,
+                                color: Colors.black,
+                              ),
                               SizedBox(width: 10),
                               Text(
                                 "Herafy For All Requested",
-                                style: TextStyle(
-                                    color: Colors.black),
+                                style: TextStyle(color: Colors.black),
                               )
                             ],
                           )
@@ -521,8 +666,11 @@ class ListOfRequested extends StatelessWidget {
 
   Future getServices() async {
     var firestore = FirebaseFirestore.instance;
-    QuerySnapshot qn = await firestore.collection("craftsman").doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('requests').get();
+    QuerySnapshot qn = await firestore
+        .collection("craftsman")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('requests')
+        .get();
     return qn.docs;
   }
 }
