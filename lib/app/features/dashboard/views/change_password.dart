@@ -2,12 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-
+import '../../../login/screens/register.dart';
 
 class DTChangePasswordScreen extends StatefulWidget {
   static String tag = '/DTChangePasswordScreen';
 
-  const DTChangePasswordScreen({Key? key, }) : super(key: key);
+  const DTChangePasswordScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   DTChangePasswordScreenState createState() => DTChangePasswordScreenState();
@@ -52,7 +54,7 @@ class DTChangePasswordScreenState extends State<DTChangePasswordScreen> {
       ),
       body: Center(
         child: Container(
-          width: MediaQuery.of(context).size.width/2,
+          width: MediaQuery.of(context).size.width / 2,
           padding: const EdgeInsets.all(16),
           alignment: Alignment.center,
           child: Form(
@@ -77,14 +79,13 @@ class DTChangePasswordScreenState extends State<DTChangePasswordScreen> {
                     border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide:  BorderSide(color: Colors.black)),
+                        borderSide: BorderSide(color: Colors.black)),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide:
-                        BorderSide(color: Colors.black)),
+                        borderSide: BorderSide(color: Colors.black)),
                     suffix: Icon(!newPassObscureText
-                        ? Icons.visibility
-                        : Icons.visibility_off)
+                            ? Icons.visibility
+                            : Icons.visibility_off)
                         .onTap(() {
                       newPassObscureText = !newPassObscureText;
                       setState(() {});
@@ -112,14 +113,13 @@ class DTChangePasswordScreenState extends State<DTChangePasswordScreen> {
                     border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide:  BorderSide(color: Colors.black)),
+                        borderSide: BorderSide(color: Colors.black)),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide:
-                        BorderSide(color: Colors.black)),
+                        borderSide: const BorderSide(color: Colors.black)),
                     suffix: Icon(!confirmPassObscureText
-                        ? Icons.visibility
-                        : Icons.visibility_off)
+                            ? Icons.visibility
+                            : Icons.visibility_off)
                         .onTap(() {
                       confirmPassObscureText = !confirmPassObscureText;
                       setState(() {});
@@ -148,7 +148,13 @@ class DTChangePasswordScreenState extends State<DTChangePasswordScreen> {
                     // formKey.currentState!.save();
                     print(newPassCont.text);
                     await FirebaseAuth.instance.currentUser!
-                        .updatePassword(newPassCont.text);
+                        .updatePassword(newPassCont.text)
+                        .then((value) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Home()),
+                      );
+                    });
                     finish(context);
                   } else {
                     autoValidate = true;

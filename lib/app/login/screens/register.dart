@@ -267,7 +267,7 @@ class _HomeState extends State<Home> {
                           controller: rePass,
                           type: TextInputType.text,
                           validat: (val) {
-                            if (val!.length < 8) {
+                            if (val!.trim() != pass.text) {
                               return 'Error password';
                             } else {
                               return null;
@@ -305,13 +305,15 @@ class _HomeState extends State<Home> {
                                     MaterialStateProperty.all(Colors.blue),
                               ),
                               onPressed: () {
-                                if (formGlobalKey.currentState!.validate()) {
-                                  formGlobalKey.currentState!.save();
+                                if (gender!.isNotEmpty) {
+                                  if (formGlobalKey.currentState!.validate()) {
+                                    formGlobalKey.currentState!.save();
 
-                                  signUp().then((value) {
-                                    Get.toNamed(AppPages.initial);
-                                    addDataEmail();
-                                  });
+                                    signUp().then((value) {
+                                      Get.toNamed(AppPages.initial);
+                                      addDataEmail();
+                                    });
+                                  }
                                 }
 
                                 // Get.lazyPut(() => DashboardController());

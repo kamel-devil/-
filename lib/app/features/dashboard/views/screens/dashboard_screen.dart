@@ -29,18 +29,25 @@ import '../profile.dart';
 
 // binding
 part '../../bindings/dashboard_binding.dart';
+
 // controller
 part '../../controllers/dashboard_controller.dart';
+
 // models
 part '../../models/profile.dart';
+
 // component
 part '../components/active_project_card.dart';
-part '../components/header.dart';
-part '../components/overview_header.dart';
-part '../components/profile_tile.dart';
-part '../components/recent_messages.dart';
-part '../components/sidebar.dart';
 
+part '../components/header.dart';
+
+part '../components/overview_header.dart';
+
+part '../components/profile_tile.dart';
+
+part '../components/recent_messages.dart';
+
+part '../components/sidebar.dart';
 
 class DashboardScreen extends GetView<DashboardController> {
   const DashboardScreen({Key? key}) : super(key: key);

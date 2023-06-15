@@ -31,7 +31,7 @@ class LoginScreen extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) =>  Home()),
                 );            },
-              child: Text('Register',style: TextStyle(color: Colors.blue,fontSize: 24),)),
+              child: const Text('Register',style: TextStyle(color: Colors.blue,fontSize: 24),)),
         )
 
       ],
