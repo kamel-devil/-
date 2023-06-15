@@ -82,6 +82,7 @@ class DashboardScreen extends GetView<DashboardController> {
                     .doc(FirebaseAuth.instance.currentUser!.uid)
                     .collection('requests')
                     .where('isAccept', isEqualTo: 0)
+                    .where('cancelorder', isEqualTo: false)
                     .snapshots(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
@@ -187,6 +188,7 @@ class DashboardScreen extends GetView<DashboardController> {
                             .doc(FirebaseAuth.instance.currentUser!.uid)
                             .collection('requests')
                             .where('isAccept', isEqualTo: 0)
+                            .where('cancelorder', isEqualTo: false)
                             .snapshots(),
                         builder: (context, AsyncSnapshot snapshot) {
                           if (snapshot.hasData) {

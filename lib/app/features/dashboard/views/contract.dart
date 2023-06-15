@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ListOfRequested extends StatelessWidget {
   const ListOfRequested({
@@ -373,6 +374,17 @@ class ListOfRequested extends StatelessWidget {
                                                                   ),
                                                           ],
                                                         ),
+                                                        const SizedBox(
+                                                          height: 10,
+                                                        ),
+                                                        IconButton(
+                                                            onPressed:
+                                                                () {
+                                                              launchUrl(Uri.parse('https://wa.me/${category[index]['phone']}'));
+                                                            },
+                                                            icon: const Icon(
+                                                                Icons
+                                                                    .phone)),
                                                         const SizedBox(
                                                           height: 100,
                                                         ),

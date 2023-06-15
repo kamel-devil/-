@@ -51,6 +51,7 @@ dependencies:
   email_validator:
   flutter_mobx:
   flutter_vector_icons:
+  url_launcher:
   nb_utils: ^5.0.8
   quickalert: ^1.0.1
 dev_dependencies:

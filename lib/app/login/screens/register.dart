@@ -253,7 +253,7 @@ class _HomeState extends State<Home> {
                             controller: pass,
                             type: TextInputType.text,
                             validat: (value) {
-                              if (value!.isEmpty && !(value.length < 8)) {
+                              if (value!.isEmpty) {
                                 return 'Please enter password';
                               }
                               return null;
@@ -305,8 +305,8 @@ class _HomeState extends State<Home> {
                                     MaterialStateProperty.all(Colors.blue),
                               ),
                               onPressed: () {
-                                if (gender!.isNotEmpty) {
-                                  if (formGlobalKey.currentState!.validate()) {
+                                if (formGlobalKey.currentState!.validate()) {
+                                  if (gender!.isNotEmpty) {
                                     formGlobalKey.currentState!.save();
 
                                     signUp().then((value) {

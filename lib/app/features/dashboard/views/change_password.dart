@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:nb_utils/nb_utils.dart';
-
-import '../../../login/screens/register.dart';
+import 'package:project_management/app/features/dashboard/views/screens/dashboard_screen.dart';
 
 class DTChangePasswordScreen extends StatefulWidget {
   static String tag = '/DTChangePasswordScreen';
@@ -148,13 +147,12 @@ class DTChangePasswordScreenState extends State<DTChangePasswordScreen> {
                     // formKey.currentState!.save();
                     print(newPassCont.text);
                     await FirebaseAuth.instance.currentUser!
-                        .updatePassword(newPassCont.text)
-                        .then((value) {
-                      Navigator.push(
+                        .updatePassword(newPassCont.text);
+                    Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const Home()),
-                      );
-                    });
+                        MaterialPageRoute(
+                            builder: (context) => const DashboardScreen()));
+
                     finish(context);
                   } else {
                     autoValidate = true;
