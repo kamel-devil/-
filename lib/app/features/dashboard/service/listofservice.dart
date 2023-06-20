@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import 'service.dart';
+import 'add_servecie/service.dart';
 
 class ListOfService extends StatelessWidget {
   const ListOfService({
@@ -52,14 +52,7 @@ class ListOfService extends StatelessWidget {
                                             color: Colors.black),
                                       ),
                                       const Spacer(),
-                                      IconButton(
-                                          icon: Icon(
-                                            Icons.search,
-                                            color:
-                                                Theme.of(context).primaryColor,
-                                          ),
-                                          onPressed: () {}),
-                                      const SizedBox(width: 20),
+
                                       IconButton(
                                         icon: Icon(
                                           Icons.add,

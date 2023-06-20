@@ -130,7 +130,7 @@ class ProjectCard extends StatelessWidget {
 
               ],
             )
-        );;
+        );
       },
       child: service
           ? data['isAccept'] == 1

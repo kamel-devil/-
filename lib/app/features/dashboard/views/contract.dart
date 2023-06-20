@@ -402,58 +402,6 @@ class ListOfRequested extends StatelessWidget {
                                                             ),
                                                           ),
                                                           onPressed: () async {
-                                                            // QuickAlert.show(
-                                                            //   context: context,
-                                                            //   type: QuickAlertType.success,
-                                                            //   onCancelBtnTap: () {
-                                                            //     Navigator.pop(context);
-                                                            //   },
-                                                            //   onConfirmBtnTap: () async {
-                                                            //     await FirebaseFirestore.instance
-                                                            //         .collection('craftsman')
-                                                            //         .doc(FirebaseAuth.instance.currentUser!.uid)
-                                                            //         .collection('requests')
-                                                            //         .doc(data['id'])
-                                                            //         .set(
-                                                            //       {
-                                                            //         'isAccept': 2,
-                                                            //       },
-                                                            //       SetOptions(merge: true),
-                                                            //     );
-                                                            //     await FirebaseFirestore.instance
-                                                            //         .collection('users')
-                                                            //         .doc(data['userUid'])
-                                                            //         .collection('request')
-                                                            //         .doc(data['userDocID'])
-                                                            //         .set(
-                                                            //       {
-                                                            //         'isAccept': 2,
-                                                            //       },
-                                                            //       SetOptions(merge: true),
-                                                            //     );
-                                                            //     await FirebaseFirestore.instance
-                                                            //         .collection('craftsman')
-                                                            //         .doc(FirebaseAuth.instance.currentUser!.uid)
-                                                            //         .get()
-                                                            //         .then((value) {
-                                                            //       FirebaseFirestore.instance
-                                                            //           .collection('craftsman')
-                                                            //           .doc(FirebaseAuth
-                                                            //               .instance.currentUser!.uid)
-                                                            //           .set(
-                                                            //         {
-                                                            //           'count': value['count'] + 1,
-                                                            //         },
-                                                            //         SetOptions(merge: true),
-                                                            //       );
-                                                            //     }).whenComplete(() => Navigator.pop(context));
-                                                            //   },
-                                                            //   showCancelBtn: true,
-                                                            //   cancelBtnText: 'Cancel',
-                                                            //   confirmBtnText: 'Confirm',
-                                                            //   customAsset: 'assets/user1.jpg',
-                                                            //   text: '',
-                                                            // );
                                                             showDialog<void>(
                                                               context: context,
                                                               barrierDismissible:

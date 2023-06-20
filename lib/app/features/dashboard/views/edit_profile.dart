@@ -110,12 +110,13 @@ class _ProfileEditState extends State<ProfileEdit> {
                                           offset: const Offset(0, 10))
                                     ],
                                     shape: BoxShape.circle,
-                                    image:  DecorationImage(
+                                    image: DecorationImage(
                                         fit: BoxFit.cover,
-                                        image:isMale
-                                            ?  const AssetImage('assets/images/man.png')
+                                        image: isMale
+                                            ? const AssetImage(
+                                                'assets/images/man.png')
                                             : const AssetImage(
-                                            'assets/images/woman.png'))),
+                                                'assets/images/woman.png'))),
                               )
                             : Container(
                                 width: 130,
@@ -177,7 +178,6 @@ class _ProfileEditState extends State<ProfileEdit> {
                 padding: const EdgeInsets.only(bottom: 35.0),
                 child: TextFormField(
                   style: const TextStyle(color: Colors.black),
-
                   controller: name,
                   obscureText: false,
                   validator: (val) {
@@ -213,12 +213,9 @@ class _ProfileEditState extends State<ProfileEdit> {
                     return null;
                   },
                   style: const TextStyle(color: Colors.black),
-
                   decoration: InputDecoration(
-
                       contentPadding: const EdgeInsets.only(bottom: 3),
                       labelText: "phone",
-
                       labelStyle: const TextStyle(color: Colors.black),
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                       hintText: widget.phone,
@@ -392,7 +389,7 @@ class _ProfileEditState extends State<ProfileEdit> {
         // uploadTask = ref.putFile(File(file!.path));
         uploadTask = ref.putData(selectedImageInBytes!, metadata);
 
-        await uploadTask.whenComplete(() => null);
+        await uploadTask.whenComplete(() =>  null);
         imageUrl = await ref.getDownloadURL();
         print(imageUrl);
         print(FirebaseAuth.instance.currentUser!.uid);

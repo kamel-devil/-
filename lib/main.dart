@@ -15,8 +15,8 @@ Future<void> main() async {
           projectId: "herafy-983de",
           storageBucket: "herafy-983de.appspot.com",
           messagingSenderId: "1088905524845",
-          appId: "1:1088905524845:web:a402d7112952c24da4b164",
-          measurementId: "G-HBZV1ZHMNK"
+          appId: "1:1088905524845:web:e9900b001498ff97a4b164",
+          measurementId: "G-F317JCQMDG"
       )
   );
   runApp(const MyApp());

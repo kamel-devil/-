@@ -10,22 +10,21 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:project_management/app/constans/app_constants.dart';
-import 'package:project_management/app/shared_components/get_premium_card.dart';
-import 'package:project_management/app/shared_components/project_card.dart';
-import 'package:project_management/app/shared_components/responsive_builder.dart';
-import 'package:project_management/app/shared_components/search_field.dart';
-import 'package:project_management/app/shared_components/selection_button.dart';
-import 'package:project_management/app/shared_components/task_card.dart';
-import 'package:project_management/app/shared_components/today_text.dart';
-import 'package:project_management/app/shared_components/upgrade_premium_card.dart';
+import 'package:project_management/app/features/dashboard/views/components/project_card.dart';
+import 'package:project_management/app/features/dashboard/views/components/task_card.dart';
+import 'package:project_management/app/features/dashboard/views/components/upgrade_premium_card.dart';
 import 'package:project_management/app/utils/helpers/app_helpers.dart';
 
 import '../../../../login/screens/login.dart';
-import '../../add_servecie/listofservice.dart';
-import '../../add_servecie/service.dart';
+
+import '../../service/add_servecie/service.dart';
+import '../../service/listofservice.dart';
 import '../change_password.dart';
+import '../components/responsive_builder.dart';
+import '../components/selection_button.dart';
+import '../components/today_text.dart';
 import '../contract.dart';
-import '../profile.dart';
+import '../edit_profile.dart';
 
 // binding
 part '../../bindings/dashboard_binding.dart';
@@ -71,10 +70,6 @@ class DashboardScreen extends GetView<DashboardController> {
             const SizedBox(height: kSpacing * (kIsWeb ? 1 : 2)),
             _buildHeader(onPressedMenu: () => controller.openDrawer()),
             const SizedBox(height: kSpacing),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-              child: GetPremiumCard(onPressed: () {}),
-            ),
             const SizedBox(height: kSpacing * 2),
             StreamBuilder(
                 stream: FirebaseFirestore.instance
@@ -150,10 +145,6 @@ class DashboardScreen extends GetView<DashboardController> {
                   children: [
                     const SizedBox(height: kSpacing * (kIsWeb ? 0.5 : 1.5)),
                     const Divider(thickness: 1),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: kSpacing),
-                      child: GetPremiumCard(onPressed: () {}),
-                    ),
                     const SizedBox(height: kSpacing),
                     const Divider(thickness: 1),
                     const SizedBox(height: kSpacing),
@@ -203,7 +194,7 @@ class DashboardScreen extends GetView<DashboardController> {
                             return const Center(
                                 child: CircularProgressIndicator());
                           }
-                        }),
+                        }),//الطلبات الي بتيجي من ال client
                     const SizedBox(height: kSpacing * 2),
                     StreamBuilder(
                         stream: FirebaseFirestore.instance
@@ -225,7 +216,7 @@ class DashboardScreen extends GetView<DashboardController> {
                             return const Center(
                                 child: CircularProgressIndicator());
                           }
-                        }),
+                        }),//الخدمات بتاعت ال craftsman
                     const SizedBox(height: kSpacing),
                     StreamBuilder(
                         stream: FirebaseFirestore.instance
@@ -247,7 +238,7 @@ class DashboardScreen extends GetView<DashboardController> {
                             return const Center(
                                 child: CircularProgressIndicator());
                           }
-                        }),
+                        }),//الطلبات الي بتيجي من ال client المتوافق عليها
                     const SizedBox(height: kSpacing),
                   ],
                 ),

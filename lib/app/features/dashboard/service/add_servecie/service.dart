@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'left_side.dart';
-import 'right_side.dart';
+import 'componentof service/left_side.dart';
+import 'componentof service/right_side.dart';
 
 class Service extends StatelessWidget {
   const Service({Key? key}) : super(key: key);

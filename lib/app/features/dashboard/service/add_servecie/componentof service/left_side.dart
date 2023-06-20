@@ -59,7 +59,6 @@ class _CategoryLeftSideState extends State<CategoryLeftSide> {
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         List sup = snapshot.data as List;
-
                         return SizedBox(
                           height: 60,
                           child: DropdownSearch<String>(
