@@ -44,7 +44,6 @@ part '../components/overview_header.dart';
 
 part '../components/profile_tile.dart';
 
-part '../components/recent_messages.dart';
 
 part '../components/sidebar.dart';
 

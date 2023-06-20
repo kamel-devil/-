@@ -19,7 +19,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.home,
-      page: () =>  Home(),
+      page: () =>  const Home(),
        binding: DashboardBinding(),
     ),
   ];

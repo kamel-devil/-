@@ -48,7 +48,7 @@ class DTChangePasswordScreenState extends State<DTChangePasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Change Password'),
+        title: const Text('Change Password'),
         centerTitle: true,
       ),
       body: Center(
@@ -78,10 +78,10 @@ class DTChangePasswordScreenState extends State<DTChangePasswordScreen> {
                     border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide(color: Colors.black)),
+                        borderSide: const BorderSide(color: Colors.black)),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide(color: Colors.black)),
+                        borderSide: const BorderSide(color: Colors.black)),
                     suffix: Icon(!newPassObscureText
                             ? Icons.visibility
                             : Icons.visibility_off)
@@ -93,7 +93,7 @@ class DTChangePasswordScreenState extends State<DTChangePasswordScreen> {
                   onFieldSubmitted: (s) =>
                       FocusScope.of(context).requestFocus(confirmPassFocus),
                   validator: (s) {
-                    if (s!.trim().isEmpty) {
+                    if (s!.trim().isEmpty && s.length>8) {
                       return 'Password is Less than 8 character';
                     }
                     return null;
@@ -112,7 +112,7 @@ class DTChangePasswordScreenState extends State<DTChangePasswordScreen> {
                     border: const OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
-                        borderSide: BorderSide(color: Colors.black)),
+                        borderSide: const BorderSide(color: Colors.black)),
                     enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8.0),
                         borderSide: const BorderSide(color: Colors.black)),
